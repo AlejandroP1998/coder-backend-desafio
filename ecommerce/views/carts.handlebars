@@ -1,0 +1,24 @@
+<style>
+  ul {
+    list-style-type: none;
+  }
+</style>
+
+{{#if hayDocs}}
+<ul>
+  {{#each docs}}
+  <hr>
+  <li>
+    <h2>Item:</h2> 
+    {{this.product.title}}
+  </li>
+  <li>
+    <h2>Cantidad:</h2>
+    {{this.quantity}}
+  </li>
+  {{/each}}
+</ul>
+{{else}}
+No hay productos añadidos al carrito...
+{{/if}}
+<hr>
