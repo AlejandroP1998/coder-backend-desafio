@@ -6,5 +6,5 @@ function irAPag(limit) {
 const btnLO = document.querySelector('#btnLO')
 btnLO.addEventListener('click', async event => {
   event.preventDefault()
-  window.location.href = '/logout/'
+  window.location.href = '/api/logout'
 })

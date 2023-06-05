@@ -1,18 +1,25 @@
-import { cartManager } from "../dao/DB/cart.manager.js"
-import userModel from "../dao/models/schemaUser.js"
-import { hashear } from "../utils/criptografia.js"
+import { cartService } from "../services/cart.service.js"
+
+import { userRepository } from "../repositories/user.repository.js"
+import { user } from "../models/user.js"
+
 
 export async function registroController(req, res, next) {
-  const carrito = await cartManager.addCart({ "products": [] })
-  const { first_name, last_name, email, age, password, rol } = req.body
-  //console.log('cartId', carrito._id)
-  const cartId = carrito._id
-  const user = await userModel.create({ first_name, last_name, email, age, password: hashear(password), rol, cartId })
-  req.login(user, error => {
+  const carrito = await cartService.addCart()
+  const { first_name, last_name, email, age, password} = req.body
+  const usuario = await userRepository.create(new user({
+    first_name:first_name, 
+    last_name:last_name,
+    email:email,
+    age:age,
+    password:password,
+    cartId: carrito.idCart
+  }).datos())
+  req.login(usuario, error => {
     if (error) {
       next(new Error('fallo el registro'))
     } else {
-      req.session.user = user
+      req.session.user = usuario
       res.status(201).json(req.user)
     }
   })
@@ -26,6 +33,6 @@ export async function loginController(req, res, next) {
 export async function logoutController(req, res, next) {
   // lo que estaba acá lo reemplacé por el atajo que me provee passport
   req.logout(err => {
-    res.redirect('/')
+    res.redirect('/api/')
   })
 }

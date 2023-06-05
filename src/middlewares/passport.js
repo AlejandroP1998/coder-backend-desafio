@@ -1,18 +1,18 @@
 import passport from "passport";
 import { Strategy } from "passport-local";
 import { deshashear, hashear } from "../utils/criptografia.js";
-import userModel from "../dao/models/schemaUser.js";
+import { userDaoMongoose } from "../daos/user.dao.mongoose.js";
 import { Strategy as GithubStrategy } from 'passport-github2'
 import { githubCallbackUrl, githubClientSecret, githubClienteId } from "../config/github.config.js";
-import { usersManager } from "../dao/DB/githubUsers.manager.js";
-import { User } from "../entidades/User.js";
+import { userService } from "../services/github.service.js";
+import { user } from "../models/user.js";
 
 
 
 passport.use('login', new Strategy({
   usernameField: 'email',
 }, async (username, password, done) => {
-  const buscado = await userModel.findOne({ email: username })
+  const buscado = await userDaoMongoose.findOne({ email: username })
   if (!buscado) {
     return done(new Error('Datos incorrectos'))
   }
@@ -31,14 +31,13 @@ passport.use('github', new GithubStrategy({
   //console.log(profile)
   let user
   try {
-    user = await usersManager.buscarPorEmail(profile.username)
+    user = await userService.buscarPorEmail(profile.username)
   } catch (error) {
     // @ts-ignore
-    user = new User({
-      email: profile.username,
-      rol: 'usuario'
+    user = new user({
+      email: profile.username
     })
-    await usersManager.guardar(user)
+    await userService.guardar(user)
     //console.log('usersManager.obtenerTodos()', usersManager.obtenerTodos())
   }
   done(null, user)

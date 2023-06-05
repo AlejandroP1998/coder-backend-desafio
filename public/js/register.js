@@ -11,7 +11,6 @@ if (formLogin instanceof HTMLFormElement) {
     const input_email = document.querySelector('#input_email')
     const input_age = document.querySelector('#input_age')
     const input_password = document.querySelector('#input_password')
-    let rol = 'usuario'
     if (
       input_first_name instanceof HTMLInputElement &&
       input_last_name instanceof HTMLInputElement &&
@@ -19,16 +18,12 @@ if (formLogin instanceof HTMLFormElement) {
       input_age instanceof HTMLInputElement &&
       input_password instanceof HTMLInputElement
     ) {
-      if (input_email.value === 'adminCoder@coder.com' && input_password.value === 'adminCod3r123') {
-        rol = 'Administrador'
-      }
       const datosUsuario = {
         first_name: input_first_name.value,
         last_name: input_last_name.value,
         email: input_email.value,
         age: input_age.value,
-        password: input_password.value,
-        rol: rol
+        password: input_password.value
       }
 
       await fetch('/api/register/', {
