@@ -1,3 +1,4 @@
+import { product } from '../models/product.js'
 import { productRepository } from '../repositories/product.repository.js'
 import { productService } from '../services/products.service.js'
 
@@ -23,7 +24,7 @@ export async function handleGet(req, res, next) {
 
 export async function handlePost(req, res, next) {
   try {
-    const creado = await productRepository.create(req.body)
+    const creado = await productRepository.create(new product(req.body).dto())
     res.status(201).json(creado)
   } catch (error) { 
     next(error)

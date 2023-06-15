@@ -1,4 +1,5 @@
 import { randomUUID } from "crypto"
+import { stringValido, validarEnteroPositivo } from "./validations/validations.js"
 
 export class product {
   #idProduct
@@ -22,10 +23,10 @@ export class product {
     category
   }) {
     this.#idProduct = idProduct
-    this.#title = title
+    this.#title = stringValido(title,'title')
     this.#description = description
     this.#code = code
-    this.#price = price
+    this.#price = validarEnteroPositivo(price, 'price')
     this.#status = status
     this.#stock = stock
     this.#thumbnails = thumbnails
