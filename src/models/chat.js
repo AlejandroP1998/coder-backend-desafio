@@ -13,7 +13,7 @@ export class chat {
     this.#user = user
     this.#message = message
   }
-  datos() {
+  dto() {
     return {
       idChat: this.#idChat,
       user: this.#user,

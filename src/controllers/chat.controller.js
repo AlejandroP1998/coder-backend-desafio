@@ -1,6 +1,6 @@
 import { chatRepository } from '../repositories/chat.repository.js'
 
-export async function handleGet(req, res, next) {
+/* export async function handleGet(req, res, next) {
   try {
     if (req.params.id) {
       const buscado = await chatRepository.readOne({ id: req.params.id })
@@ -12,7 +12,7 @@ export async function handleGet(req, res, next) {
   } catch (error) { 
     next(error)
   }
-}
+} */
 
 export async function handlePost(req, res, next) {
   try {
@@ -23,7 +23,7 @@ export async function handlePost(req, res, next) {
   }
 }
 
-export async function handlePut(req, res, next) {
+/* export async function handlePut(req, res, next) {
   try {
     const actualizado = await chatRepository.updateOne(req.params.id, req.body)
     res.json(actualizado)
@@ -39,4 +39,4 @@ export async function handleDelete(req, res, next) {
   } catch (error) { 
     next(error)
   }
-}
+} */

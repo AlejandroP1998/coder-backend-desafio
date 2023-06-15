@@ -1,8 +1,8 @@
-import { productDaoMongoose } from "../daos/product.dao.mongoose.js"
+import productModel from "../daos/product.dao.mongoose.js"
 
-class productsManager {
+class ProductService {
   constructor() {
-    this.productsDB = productDaoMongoose
+    this.productsDB = productModel
   }
 
   async getProducts(limit = 10, page = 1, query = null, sort = 0) {
@@ -18,32 +18,10 @@ class productsManager {
     return prod
   }
 
-  async getProductsLimited(limit) {
-    const prodsLimited = await this.productsDB.find().limit(limit).lean()
-    return prodsLimited
-  }
-
-  async addProduct(product) {
-    const prod = await this.productsDB.create(product)
+  async getProductsById(id){
+    const prod = await this.productsDB.findById(id)
     return prod
   }
-
-  async getProductById(id) {
-    const prod = await this.productsDB.findById(id).lean()
-    return prod
-  }
-
-  async updateProduct(id, update) {
-    const filter = { _id: new ObjectId(id) };
-    const prod = await this.productsDB.findByIdAndUpdate(filter, update)
-    return prod
-  }
-
-  async deleteProduct(id) {
-    await this.productsDB.deleteOne({ _id: new ObjectId(id) })
-    return
-  }
-
 }
 
-export const prodManager = new productsManager()
+export const productService = new ProductService()

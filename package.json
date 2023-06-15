@@ -28,6 +28,7 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@types/express": "latest",
     "@types/node": "latest",
     "nodemon": "latest"

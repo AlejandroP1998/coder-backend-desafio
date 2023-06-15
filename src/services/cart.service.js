@@ -4,70 +4,60 @@ import { cartRepository } from "../repositories/cart.repository.js"
 class CartService {
 
   async addCart() {
-    const carrito = await cartRepository.create(new cart({ "products": [] }).datos())
+    const carrito = await cartRepository.create(new cart({ "products": [] }).dto())
     return carrito
   }
 
   async getProductsInCart(id) {
-    const cart = await this.cartDB.findById(id).populate('products.product').lean()
+    const cart = await cartRepository.readOne({ idCart: id }).populate('products.product').lean()
     return cart
 
   }
 
   async pushProduct(id, product) {
-    const cart = await this.cartDB.findById(id).lean()
-    const finded = cart.products.some((prod) => prod.product._id.toString() === product._id.toString())
+    const cart = await cartRepository.readOne({ idCart: id }).lean()
+    const finded = cart.products.some((prod) => prod.product.idProduct === product.idProduct)
     if (finded) {
-      const index = cart.products.findIndex((prod) => prod.product._id.toString() === product._id.toString())
+      const index = cart.products.findIndex((prod) => prod.product.idProduct === product.idProduct)
       cart.products[index].quantity += 1
     } else {
       cart.products.push({ product: product, quantity: 1 })
     }
-
-    //console.log('carts',cart.products )
-    const filter = { _id: new ObjectId(id) }
-    const carrito = await this.cartDB.findOneAndUpdate(filter, { products: cart.products }).populate('products').lean()
+    const filter = { idCart: id }
+    const carrito = await cartRepository.updateOne(filter, { products: cart.products }).populate('products').lean()
     return carrito
   }
 
   async deleteProduct(id, product) {
-    const cart = await this.cartDB.findById(id)
-    const finded = cart.products.some((prod) => prod.product._id.toString() === product._id.toString())
-    //console.log('finded', finded)
+    const cart = await cartRepository.readOne({ idCart: id })
+    const finded = cart.products.some((prod) => prod.product.idProduct === product.idProduct)
     if (finded) {
-      const index = cart.products.findIndex((prod) => prod.product._id.toString() === product._id.toString())
-      //console.log('index', index)
+      const index = cart.products.findIndex((prod) => prod.product.idProduct === product.idProduct)
       cart.products.splice(index, 1)
-      //console.log('cart.products', cart.products)
-
-      //console.log('cart.products[index]', cart.products[index])
-
     }
-    const filter = { _id: new ObjectId(id) }
-    const carrito = await this.cartDB.findOneAndUpdate(filter, { products: cart.products })
+    const filter = { idCart: id }
+    const carrito = await cartRepository.updateOne(filter, { products: cart.products })
     return carrito
   }
 
   async updateCart(id, products) {
-    //console.log('products', products)
-
-    const filter = { _id: new ObjectId(id) }
-    const carrito = await this.cartDB.findOneAndUpdate(filter, { products: products }).lean().populate('products.product')
+    const filter = { idCart: id }
+    const carrito = await cartRepository.updateOne(filter, { products: products }).lean().populate('products.product')
     return carrito
   }
 
   async updateProduct(id, product, quantity) {
-    const cart = await this.cartDB.findById(id)
-    const index = cart.products.findIndex((prod) => prod.product._id.toString() === product._id.toString())
+    const cart = await cartRepository.readOne({ idCart: id })
+    const index = cart.products.findIndex((prod) => prod.product.idProduct === product.idProduct)
     cart.products[index].quantity = quantity
-    const filter = { _id: new ObjectId(id) }
-    const carrito = await this.cartDB.findOneAndUpdate(filter, { products: cart.products })
+    const filter = { idCart: id }
+    const carrito = await cartRepository.updateOne(filter, { products: cart.products })
     return carrito
   }
 
   async deleteProducts(id) {
-    const filter = { _id: new ObjectId(id) }
-    const carrito = await this.cartDB.findOneAndUpdate(filter, { products: [] })
+    const filter = { idCart: id }
+    const carrito = await cartRepository(filter, { products: [] })
     return carrito
   }
 }

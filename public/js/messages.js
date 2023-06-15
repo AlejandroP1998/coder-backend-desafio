@@ -7,7 +7,7 @@ if (form instanceof HTMLFormElement) {
     const data = {}
     formData.forEach((value,key) => (data[key] = value))
     
-    fetch('/api/messages',{
+    fetch('/api/chat',{
       method:'POST',
       body: JSON.stringify(data),
       headers:{

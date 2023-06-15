@@ -3,6 +3,7 @@ import { autenticacion } from "../middlewares/autenticacion.js";
 import { loginController, logoutController, registroController } from "../controllers/auth.controller.js";
 import { autenticacionlogin } from "../middlewares/passport.js";
 import productModel from "../daos/product.dao.mongoose.js";
+import { chatRepository } from "../repositories/chat.repository.js";
 
 export const viewsRouter = Router();
 
@@ -10,9 +11,10 @@ viewsRouter.get('/', (req, res, next) => {
   res.redirect('/api/login/');
 });
 
-viewsRouter.get('/messages', async (req, res, next) => {
+viewsRouter.get('/chat', async (req, res, next) => {
 
-  const mensajes = await smsManager.obtenerTodos()
+  const mensajes = await chatRepository.readMany()
+  console.log('req.session.user', req.session.user.rol )
   res.render('chat', {
     pageTitle: 'mensajes',
     hayMensajes: mensajes.length > 0,

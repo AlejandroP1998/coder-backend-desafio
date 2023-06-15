@@ -5,6 +5,8 @@ import { chatRouter } from './chat.router.js'
 import { productRouter } from './product.router.js'
 import { userRouter } from './user.router.js'
 import { viewsRouter } from './views.router.js'
+import { apiErrorHandler } from '../middlewares/apiErrorHandler.js'
+import { mockingRouter } from './mocking.router.js'
 
 export const apiRouter = Router()
 
@@ -14,3 +16,8 @@ apiRouter.use('/chat', chatRouter)
 apiRouter.use('/product', productRouter)
 apiRouter.use('/user', userRouter)
 apiRouter.use('/', viewsRouter)
+//testeo
+apiRouter.use('/', mockingRouter)
+
+//manejo de errores
+apiRouter.use(apiErrorHandler)

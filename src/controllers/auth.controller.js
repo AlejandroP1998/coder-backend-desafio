@@ -13,8 +13,9 @@ export async function registroController(req, res, next) {
     email:email,
     age:age,
     password:password,
+    rol: email ==='adminCoder@coder.com' && password === 'adminCoder123' ? 'admin' : 'user',
     cartId: carrito.idCart
-  }).datos())
+  }).dto())
   req.login(usuario, error => {
     if (error) {
       next(new Error('fallo el registro'))
@@ -27,6 +28,9 @@ export async function registroController(req, res, next) {
 
 export async function loginController(req, res, next) {
   req.session.user = req.user
+  req.session.rol = req.user.rol
+  //console.log('req.user.rol', req.user.rol)
+  //console.log('req.user', req.user)
   res.status(201).json(req.user)
 }
 

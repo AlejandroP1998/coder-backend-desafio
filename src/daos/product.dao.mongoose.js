@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import { DaoMongoose } from './DaoMongoose.js'
 
 const productSchema = new mongoose.Schema({
-  idProduct: { type: String, required: false } ,
+  idProduct: { type: String, required: true } ,
   title: { type: String, required: true },
   description: { type: String, required: true },
   code: { type: String, required: true },

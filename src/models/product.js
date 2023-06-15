@@ -9,15 +9,17 @@ export class product {
   #status
   #stock
   #thumbnails
+  #category
   constructor({
     idProduct = randomUUID(),
     title,
     description,
     code,
     price,
-    status,
+    status = true,
     stock,
-    thumbnails
+    thumbnails = [],
+    category
   }) {
     this.#idProduct = idProduct
     this.#title = title
@@ -27,8 +29,9 @@ export class product {
     this.#status = status
     this.#stock = stock
     this.#thumbnails = thumbnails
+    this.#category = category
   }
-  datos() {
+  dto() {
     return {
       idProduct: this.#idProduct,
       title: this.#title,
@@ -37,7 +40,8 @@ export class product {
       price: this.#price,
       status: this.#status,
       stock: this.#stock,
-      thumbnails: this.#thumbnails
+      thumbnails: this.#thumbnails,
+      category: this.#category
     }
   }
 }

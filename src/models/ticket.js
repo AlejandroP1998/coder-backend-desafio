@@ -20,7 +20,7 @@ export class ticket {
     this.#purchaser = purchaser
   }
 
-  datos() {
+  dto() {
     return {
       idTicket: this.#idTicket,
       code: this.#code,

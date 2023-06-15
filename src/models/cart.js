@@ -10,7 +10,7 @@ export class cart {
     this.#idCart = idCart
     this.#products = products
   }
-  datos() {
+  dto() {
     return {
       idCart: this.#idCart,
       products: this.#products

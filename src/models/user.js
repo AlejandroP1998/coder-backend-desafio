@@ -31,7 +31,7 @@ export class user {
     this.#cartId = cartId
   }
 
-  datos() {
+  dto() {
     return {
       idUser: this.#idUser,
       first_name: this.#first_name,

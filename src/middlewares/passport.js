@@ -12,7 +12,7 @@ import { user } from "../models/user.js";
 passport.use('login', new Strategy({
   usernameField: 'email',
 }, async (username, password, done) => {
-  const buscado = await userDaoMongoose.findOne({ email: username })
+  const buscado = await userDaoMongoose.readOne({ email: username })
   if (!buscado) {
     return done(new Error('Datos incorrectos'))
   }

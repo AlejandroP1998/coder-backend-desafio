@@ -1,4 +1,5 @@
 import { productRepository } from '../repositories/product.repository.js'
+import { productService } from '../services/products.service.js'
 
 export async function handleGet(req, res, next) {
   try {
@@ -6,8 +7,14 @@ export async function handleGet(req, res, next) {
       const buscado = await productRepository.readOne({ id: req.params.id })
       res.json(buscado)
     } else {
-      const product = await productRepository.readMany(req.query)
-      res.json(product)
+      const limite = parseInt(req.query.limit)
+      const page = parseInt(req.query.page)
+      const query = req.query.query
+      const sort = req.query.sort
+
+      const products = await productService.getProducts(isNaN(limite) ? 10 : limite, page, query, sort === 'asc' ? 1 : -1)
+      const limit = limite ? limite : "10"
+      res.json({ status: "success - Mostrando " + limit + " productos", payload: products })
     }
   } catch (error) { 
     next(error)

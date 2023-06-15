@@ -8,3 +8,8 @@ btnLO.addEventListener('click', async event => {
   event.preventDefault()
   window.location.href = '/api/logout'
 })
+
+const btnCompra = document.querySelector('#btnCompra')
+btnCompra.addEventListener('click', async event => {
+  event.preventDefault()
+})
