@@ -5,6 +5,7 @@ import { autenticacionlogin } from "../middlewares/passport.js";
 import productModel from "../daos/product.dao.mongoose.js";
 import { chatRepository } from "../repositories/chat.repository.js";
 import compression from "express-compression";
+import path from 'path'
 
 export const viewsRouter = Router();
 
@@ -85,3 +86,15 @@ viewsRouter.get('/sessions/current', async (req, res, next) => {
     userInfo: req.session.user
   })
 })
+
+viewsRouter.get('/logger', async(req, res, next)=>{
+  const options = {
+    root: path.join('./')
+  };
+  res.sendFile('events.log', options, function (err) {
+    if (err) {
+      next(err);
+    } else {
+      req.logger.info('events.log');
+    }})
+} )
