@@ -27,6 +27,9 @@ const winstonLoggerDev = winston.createLogger({
 const winstonLoggerProd = winston.createLogger({
   // levels
   transports: [
+    new winston.transports.Console({
+      level: "info"
+    }),
     new winston.transports.File({
       level: "info",
       filename: 'events.log'
