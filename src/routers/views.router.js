@@ -87,7 +87,7 @@ viewsRouter.get('/sessions/current', async (req, res, next) => {
   })
 })
 
-viewsRouter.get('/logger', async(req, res, next)=>{
+viewsRouter.get('/loggerTest', async(req, res, next)=>{
   const options = {
     root: path.join('./')
   };
