@@ -1,5 +1,8 @@
 import { randomUUID } from "crypto"
 import { hashear } from "../utils/criptografia.js"
+import { cartRouter } from "../routers/cart.router.js"
+import { cartRepository } from "../repositories/cart.repository.js"
+import { cart } from "./cart.js"
 
 export class user {
   #idUser
@@ -12,14 +15,14 @@ export class user {
   #cartId
 
   constructor({
-    idUser = randomUUID(),
+    idUser = randomUUID().replace('-','').slice(0,12),
     first_name,
     last_name,
     email,
     age,
     password,
     rol = 'user',
-    cartId
+    cartId = cartRepository.create(cart.dto().cartId)
   }) {
     this.#idUser = idUser
     this.#first_name = first_name

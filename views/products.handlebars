@@ -21,7 +21,7 @@
 <h4>rol: usuario</h4>
 {{/if}}
 <hr>
-<button id="btnLO">Logout</button>
+<button id="btnLO" cartId={{userInfo.cartId}}>Logout</button>
 {{else}}
 {{/if}}
 
@@ -35,7 +35,7 @@
   <li>
     <h4>Description:</h4> {{this.description}}
   </li>
-  <button id="btnCompra">Añadir al carrito</button>
+  <button id="btnCompra" productId={{this.id}}>Añadir al carrito</button>
   {{/each}}
 </ul>
 {{else}}

@@ -7,7 +7,7 @@ export class ticket {
   #amount
   #purchaser
   constructor({
-    idTicket = randomUUID(),
+    idTicket = randomUUID().replace('-', '').slice(0, 12),
     code,
     purchase_datetime,
     amount,

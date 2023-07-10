@@ -2,6 +2,7 @@ import { cartService } from "../services/cart.service.js"
 
 import { userRepository } from "../repositories/user.repository.js"
 import { user } from "../models/user.js"
+import { emailService } from "../services/email.service.js"
 
 
 export async function registroController(req, res, next) {
@@ -16,6 +17,7 @@ export async function registroController(req, res, next) {
     rol: email ==='adminCoder@coder.com' && password === 'adminCoder123' ? 'admin' : 'user',
     cartId: carrito.idCart
   }).dto())
+  await emailService.send(usuario.email,`te doy la bienvenida ${usuario.first_name} a mi ecommerce`)
   req.login(usuario, error => {
     if (error) {
       next(new Error('fallo el registro'))

@@ -5,10 +5,7 @@ import { DaoMongoose } from './DaoMongoose.js'
 const cartSchema = new mongoose.Schema({
   idCart: { type: String },
   products: [{
-    product: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'products'
-    },
+    product: { type: String },
     quantity: { type: Number }
   }
   ]

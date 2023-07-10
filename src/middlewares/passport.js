@@ -5,7 +5,8 @@ import { userDaoMongoose } from "../daos/user.dao.mongoose.js";
 import { Strategy as GithubStrategy } from 'passport-github2'
 import { githubCallbackUrl, githubClientSecret, githubClienteId } from "../config/github.config.js";
 import { userService } from "../services/github.service.js";
-import { user } from "../models/user.js";
+import { cartRepository } from "../repositories/cart.repository.js";
+import { cart } from "../models/cart.js";
 
 
 
@@ -19,6 +20,11 @@ passport.use('login', new Strategy({
   if (!deshashear(password, buscado.password)) {
     return done(new Error('Datos incorrectos'))
   }
+
+  const carrito = new cart({idCart: buscado.cartId})
+  const finded = await cartRepository.readOne({idCart:carrito.dto().idCart})
+  finded ? null : cartRepository.create(carrito.dto())
+
   delete buscado.password
   done(null, buscado)
 }))

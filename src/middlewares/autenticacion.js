@@ -1,4 +1,4 @@
-import { winstonLogger as logger } from "../utils/logger"
+import { winstonLogger as logger } from "../utils/logger.js"
 
 export function autenticacion(req,res,next){
   if(req.session.user){

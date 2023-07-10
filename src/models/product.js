@@ -11,8 +11,9 @@ export class product {
   #stock
   #thumbnails
   #category
+  #owner
   constructor({
-    idProduct = randomUUID(),
+    idProduct = randomUUID().replace('-', '').slice(0, 12),
     title,
     description,
     code,
@@ -20,7 +21,8 @@ export class product {
     status = true,
     stock,
     thumbnails = [],
-    category
+    category,
+    owner = 'admin'
   }) {
     this.#idProduct = idProduct
     this.#title = stringValido(title,'title')
@@ -31,6 +33,7 @@ export class product {
     this.#stock = stock
     this.#thumbnails = thumbnails
     this.#category = category
+    this.#owner = owner
   }
   dto() {
     return {

@@ -5,7 +5,7 @@ export class chat {
   #user
   #message
   constructor({
-    idChat = randomUUID(),
+    idChat = randomUUID().replace('-', '').slice(0, 12),
     user,
     message
   }) {

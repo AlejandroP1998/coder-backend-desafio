@@ -3,6 +3,13 @@ import { app } from './app/app.js'
 import mongoose from 'mongoose'
 import { MONGODB_CNX_STR } from './config/mongodb.config.js'
 import { winstonLogger as logger } from './utils/logger.js'
+import 'dotenv/config'
+
+if(process.env.NODE_ENV === 'production'){
+  logger.info('entorno de produccion')
+}else{
+  logger.info('entorno de desarrollo')
+}
 
 await mongoose.connect(MONGODB_CNX_STR)
 logger.info(`Conectando a la base de datos en ->  ${MONGODB_CNX_STR} - ${new Date().toLocaleTimeString()}`)
