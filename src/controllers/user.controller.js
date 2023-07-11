@@ -1,5 +1,3 @@
-import passport from 'passport'
-import { user } from '../models/user.js'
 import { userRepository } from '../repositories/user.repository.js'
 import { hashear } from '../utils/criptografia.js'
 
@@ -34,10 +32,8 @@ export async function handlePut(req, res, next) {
     }else{
       const password = hashear(req.body.password)
       let usuario = await userRepository.readOne({email: req.body.email})
-      console.log('contraseña vieja',usuario)
       usuario.password = password
       const actualizado = await userRepository.updateOne({email: req.body.email}, usuario)
-      console.log('contraseña nueva',usuario)
       res.json(actualizado)
     }
   } catch (error) { 
@@ -47,10 +43,10 @@ export async function handlePut(req, res, next) {
 
 export async function handleRolChange(req,res,next){
   try {
-    const usuario = await userRepository.readOne(req.params.id)
+    const usuario = await userRepository.readOne({email: req.session.user.email})
     usuario.rol === 'user' ? usuario.rol = 'premium' : usuario.rol = 'user'
-    const actualizado = await userRepository.updateOne(req.params.id, usuario)
-    res.json(actualizado)
+    await userRepository.updateOne({ email: req.session.user.email }, usuario)
+    req.session.user = usuario
   } catch (error) {
     next(error)
   }

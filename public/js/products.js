@@ -1,3 +1,5 @@
+
+
 function irAPag(limit) {
   const pagDeseada = document.querySelector('input').value || 1
   window.location = `/api/products/?limit=${limit}&page=${pagDeseada}`
@@ -16,11 +18,6 @@ btnLO.addEventListener('click', async event => {
 const btnCompra = document.querySelectorAll('#btnCompra')
 btnCompra.forEach((btn) => {
   btn.addEventListener('click', async event => {
-    Swal.fire(
-      'Good job!',
-      'You clicked the button!',
-      'success'
-    )
     event.preventDefault()
     const productId = btn.getAttribute('productId')
     //console.log('productId', productId)
@@ -31,7 +28,25 @@ btnCompra.forEach((btn) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-    }).then(res => res.json())
+    })
     
   })
+})
+
+const btnPremium = document.querySelector('#btnPremium')
+btnPremium.addEventListener('click', async event => {
+  event.preventDefault()
+  await fetch('/api/user/premium', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })
+})
+
+const btnCurrent = document.querySelector('#btnCurrent')
+btnCurrent.addEventListener('click', event => {
+  event.preventDefault()
+  window.location.href = '/api/sessions/current'
 })

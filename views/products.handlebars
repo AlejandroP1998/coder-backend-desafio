@@ -21,8 +21,15 @@
 <h2>Bienvenido{{userInfo}}</h2>
 <h4>rol: usuario</h4>
 {{/if}}
+<br>
+<button id="btnPremium">Ser premium</button>
 <hr>
+<br>
 <button id="btnLO" cartId={{userInfo.cartId}}>Logout</button>
+<hr>
+<br>
+<button id="btnCurrent">Informacion de usuario</button>
+<hr>
 {{else}}
 {{/if}}
 
@@ -54,5 +61,4 @@ Pagina fuera de los limites...
   </div>
 </div>
 
-<script src="/js/sweetalert2.min.js"></script>
 <script src="/js/products.js"></script>
