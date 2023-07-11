@@ -6,6 +6,6 @@ export const userRouter = Router()
 
 userRouter.get('/:id?', userController.handleGet)
 userRouter.post('/', userController.handlePost)
-userRouter.put('/:id', userController.handlePut)
+userRouter.put('/:id?', userController.handlePut)
 userRouter.delete('/:id', userController.handleDelete)
 userRouter.put('/premium/:id', userController.handleRolChange)

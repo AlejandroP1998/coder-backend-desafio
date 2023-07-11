@@ -30,6 +30,7 @@
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "sweetalert2": "^11.7.16",
     "winston": "^3.9.0"
   },
   "devDependencies": {

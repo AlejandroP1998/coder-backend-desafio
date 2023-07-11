@@ -6,6 +6,7 @@ import productModel from "../daos/product.dao.mongoose.js";
 import { chatRepository } from "../repositories/chat.repository.js";
 import compression from "express-compression";
 import path from 'path'
+import { winstonLogger as logger } from "../utils/logger.js";
 
 export const viewsRouter = Router();
 
@@ -55,7 +56,6 @@ viewsRouter.get('/products/', compression(), autenticacion, async (req, res, nex
 
 viewsRouter.post('/register', registroController)
 
-viewsRouter.post('/account/password/reset/', resetPasswordController)
 
 viewsRouter.post('/login/', autenticacionlogin, loginController)
 
@@ -102,12 +102,26 @@ viewsRouter.get('/loggerTest', async (req, res, next) => {
   })
 })
 
+
+//+Recuperacion de contraseña
+viewsRouter.get('/account/password/request', async (req,res,next)=>{
+  res.render('resetRequest', {
+    pageTitle: 'Request password'
+  })
+})
+
+viewsRouter.post('/account/password/reset/', resetPasswordController)
+
 viewsRouter.get('/account/password/reset/:token', async (req, res, next) => {
-  if(req.session.token != null){
+  console.log('req.params.token', req.params.token)
+  console.log('req.session.token', req.session.token)
+  if (req.session.token === req.params.token){
+    logger.info('token de restauracion de contraseña valido')
     res.render('resetPassword',{
-     pageTitle:'Reset password' 
+      pageTitle:'Reset password' 
     })
   }else{
-    res.status(404)
+    logger.error('token de restauracion de contraseña invalido')
+    res.redirect('/api/login')
   }
 })

@@ -1,4 +1,7 @@
+import passport from 'passport'
+import { user } from '../models/user.js'
 import { userRepository } from '../repositories/user.repository.js'
+import { hashear } from '../utils/criptografia.js'
 
 export async function handleGet(req, res, next) {
   try {
@@ -25,8 +28,18 @@ export async function handlePost(req, res, next) {
 
 export async function handlePut(req, res, next) {
   try {
-    const actualizado = await userRepository.updateOne(req.params.id, req.body)
-    res.json(actualizado)
+    if (req.params.id){
+      const actualizado = await userRepository.updateOne(req.params.id, req.body)
+      res.json(actualizado)
+    }else{
+      const password = hashear(req.body.password)
+      let usuario = await userRepository.readOne({email: req.body.email})
+      console.log('contraseña vieja',usuario)
+      usuario.password = password
+      const actualizado = await userRepository.updateOne({email: req.body.email}, usuario)
+      console.log('contraseña nueva',usuario)
+      res.json(actualizado)
+    }
   } catch (error) { 
     next(error)
   }

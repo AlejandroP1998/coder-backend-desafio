@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy } from "passport-local";
-import { deshashear, hashear } from "../utils/criptografia.js";
+import { deshashear } from "../utils/criptografia.js";
 import { userDaoMongoose } from "../daos/user.dao.mongoose.js";
 import { Strategy as GithubStrategy } from 'passport-github2'
 import { githubCallbackUrl, githubClientSecret, githubClienteId } from "../config/github.config.js";

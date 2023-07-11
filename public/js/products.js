@@ -16,6 +16,11 @@ btnLO.addEventListener('click', async event => {
 const btnCompra = document.querySelectorAll('#btnCompra')
 btnCompra.forEach((btn) => {
   btn.addEventListener('click', async event => {
+    Swal.fire(
+      'Good job!',
+      'You clicked the button!',
+      'success'
+    )
     event.preventDefault()
     const productId = btn.getAttribute('productId')
     //console.log('productId', productId)

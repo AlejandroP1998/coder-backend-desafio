@@ -42,3 +42,9 @@ btnR.addEventListener('click',async event => {
   event.preventDefault()
   window.location.href = '/api/register/'
 })
+
+const btnReset = document.querySelector('#btnReset')
+btnReset.addEventListener('click', async event => {
+  event.preventDefault()
+  window.location.href = '/api/account/password/request'
+})
