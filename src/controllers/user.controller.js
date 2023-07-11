@@ -1,5 +1,5 @@
 import { userRepository } from '../repositories/user.repository.js'
-import { hashear } from '../utils/criptografia.js'
+import { deshashear, hashear } from '../utils/criptografia.js'
 
 export async function handleGet(req, res, next) {
   try {
@@ -32,6 +32,7 @@ export async function handlePut(req, res, next) {
     }else{
       const password = hashear(req.body.password)
       let usuario = await userRepository.readOne({email: req.body.email})
+      if(password === deshashear(usuario.password))throw new Error('La contraseña no puede ser la misma')
       usuario.password = password
       const actualizado = await userRepository.updateOne({email: req.body.email}, usuario)
       res.json(actualizado)

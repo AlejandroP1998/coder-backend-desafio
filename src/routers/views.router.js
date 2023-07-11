@@ -113,8 +113,6 @@ viewsRouter.get('/account/password/request', async (req,res,next)=>{
 viewsRouter.post('/account/password/reset/', resetPasswordController)
 
 viewsRouter.get('/account/password/reset/:token', async (req, res, next) => {
-  console.log('req.params.token', req.params.token)
-  console.log('req.session.token', req.session.token)
   if (req.session.token === req.params.token){
     logger.info('token de restauracion de contraseña valido')
     res.render('resetPassword',{
