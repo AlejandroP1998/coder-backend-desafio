@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { autenticacion } from "../middlewares/autenticacion.js";
-import { loginController, logoutController, registroController } from "../controllers/auth.controller.js";
+import { loginController, logoutController, registroController, resetPasswordController } from "../controllers/auth.controller.js";
 import { autenticacionlogin } from "../middlewares/passport.js";
 import productModel from "../daos/product.dao.mongoose.js";
 import { chatRepository } from "../repositories/chat.repository.js";
@@ -16,7 +16,7 @@ viewsRouter.get('/', (req, res, next) => {
 viewsRouter.get('/chat', async (req, res, next) => {
 
   const mensajes = await chatRepository.readMany()
-  console.log('req.session.user', req.session.user.rol )
+  console.log('req.session.user', req.session.user.rol)
   res.render('chat', {
     pageTitle: 'mensajes',
     hayMensajes: mensajes.length > 0,
@@ -24,7 +24,7 @@ viewsRouter.get('/chat', async (req, res, next) => {
   });
 });
 
-viewsRouter.get('/products/',compression(), autenticacion, async (req, res, next) => {
+viewsRouter.get('/products/', compression(), autenticacion, async (req, res, next) => {
 
   const opcionesDePaginacion = {
     limit: req.query.limit || 10, // tamaño de pagina: 5 por defecto
@@ -54,6 +54,8 @@ viewsRouter.get('/products/',compression(), autenticacion, async (req, res, next
 })
 
 viewsRouter.post('/register', registroController)
+
+viewsRouter.post('/account/password/reset/', resetPasswordController)
 
 viewsRouter.post('/login/', autenticacionlogin, loginController)
 
@@ -87,7 +89,7 @@ viewsRouter.get('/sessions/current', async (req, res, next) => {
   })
 })
 
-viewsRouter.get('/loggerTest', async(req, res, next)=>{
+viewsRouter.get('/loggerTest', async (req, res, next) => {
   const options = {
     root: path.join('./')
   };
@@ -96,5 +98,16 @@ viewsRouter.get('/loggerTest', async(req, res, next)=>{
       next(err);
     } else {
       req.logger.info('events.log');
-    }})
-} )
+    }
+  })
+})
+
+viewsRouter.get('/account/password/reset/:token', async (req, res, next) => {
+  if(req.session.token != null){
+    res.render('resetPassword',{
+     pageTitle:'Reset password' 
+    })
+  }else{
+    res.status(404)
+  }
+})

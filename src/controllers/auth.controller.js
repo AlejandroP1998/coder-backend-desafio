@@ -1,5 +1,5 @@
 import { cartService } from "../services/cart.service.js"
-
+import { randomUUID} from "crypto"
 import { userRepository } from "../repositories/user.repository.js"
 import { user } from "../models/user.js"
 import { emailService } from "../services/email.service.js"
@@ -41,4 +41,15 @@ export async function logoutController(req, res, next) {
   req.logout(err => {
     res.redirect('/api/')
   })
+}
+
+export async function resetPasswordController(req,res,next){
+  const token = randomUUID.replace('-','').slice(0,8)
+  await emailService.sendPasswordResetMail(req.session.user.email,token)
+  req.session.passwordToken = token
+  res.status(201)
+  setTimeout(function () {
+    req.session.passwordToken = null
+  }, 3600000);
+  res.status(404)
 }

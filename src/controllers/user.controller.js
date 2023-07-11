@@ -32,6 +32,17 @@ export async function handlePut(req, res, next) {
   }
 }
 
+export async function handleRolChange(req,res,next){
+  try {
+    const usuario = await userRepository.readOne(req.params.id)
+    usuario.rol === 'user' ? usuario.rol = 'premium' : usuario.rol = 'user'
+    const actualizado = await userRepository.updateOne(req.params.id, usuario)
+    res.json(actualizado)
+  } catch (error) {
+    next(error)
+  }
+}
+
 export async function handleDelete(req, res, next) {
   try {
     const borrado = await userRepository.deleteOne(req.params.id)
