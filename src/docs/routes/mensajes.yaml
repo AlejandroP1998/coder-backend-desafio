@@ -1,0 +1,19 @@
+paths:
+  /api/chat/:
+    post:
+        summary: Envia un mensaje
+        tags:
+          - Mensajes
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/NewTicket'
+        responses:
+          "201":
+            description: El ticket fue creado con exito.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Ticket'

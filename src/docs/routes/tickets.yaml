@@ -1,0 +1,93 @@
+paths:
+  /api/ticket/:
+
+    get:
+      summary: Obtiene todos los tickets en la base de datos
+      tags:
+        - Tickets
+      responses:
+        "200":
+          description: Obtiene todos los tickets en la base de datos.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ticket'
+
+    post:
+        summary: Crea un nuevo ticket
+        tags:
+          - Tickets
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/NewTicket'
+        responses:
+          "201":
+            description: El ticket fue creado con exito.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Ticket'
+  
+  
+  /api/ticket/{id}:
+  
+    get:
+      summary: Obtiene la informacion de un ticket en especifico
+      tags:
+        - Tickets
+      parameters:
+      - name: id
+        in: path
+        description: Usa el id brindado para buscar y luego mostrar el ticket.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: El ticket con el id brindado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        "404":
+          description: No se encontro el ticket.
+
+    put:
+      summary: Modifica la informacion de un ticket en especifico
+      tags:
+        - Tickets
+      parameters:
+      - name: id
+        in: path
+        description: Usa el id brindado para buscar y luego modificar el ticket.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: El ticket con el id brindado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        "404":
+          description: No se encontro el ticket.
+
+    delete:
+      summary: Elimina un ticket en especifico
+      tags:
+        - Tickets
+      parameters:
+      - name: id
+        in: path
+        description: Usa el id brindado para buscar y luego eliminar el ticket.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: El ticket ha sido eliminado con exito.
+        "404":
+          description: No se encontro el ticket.

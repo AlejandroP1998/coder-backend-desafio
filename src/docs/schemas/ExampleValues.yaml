@@ -1,6 +1,7 @@
 # Example values
 components:
   requestBodies:
+    
     NewProduct:
       type: object
       required:
@@ -54,6 +55,7 @@ components:
          category: technology
          thumbnails: [http://photo1.url.png,http://photo2.url.png,http://photo3.url.png]
          owner: Elon Musk
+    
     NewUser:
       type: object
       required:
@@ -99,3 +101,79 @@ components:
          password: as3(23&^c6ds8r&*
          rol: usuario premium 
          cartId: 6ushd7c658fc
+
+    NewChat:
+      type: object
+      required:
+        - idChat
+        - user
+        - message
+      properties:
+        idChat:
+          type: string
+          description: Identificador unico para el chat asignado a cada usuario.
+        user:
+          type: string
+          description: Id del emisor.
+        message:
+          type: string
+          description: Mensaje enviado en la plataforma.
+      example:
+         idChat: 4ughd73658fn
+         user: 456e4s5adad
+         message: hola mucho gusto.
+
+    NewCart:
+      type: object
+      required:
+        - idCart
+      properties:
+        idCart:
+          type: string
+          description: Identificador unico para el carrito asignado a cada usuario.
+        products:
+          type: array
+          description: Conjunto de productos añadidos por el usuario.
+      example:
+         idCart: 4ughd73658fn
+         products: [
+          {
+            product: "acds546",
+            quantity: 6
+          },
+          {
+            product: "edds060",
+            quantity: 2
+          }
+         ]
+    
+    NewTicket:
+      type: object
+      required:
+        - idTicket
+        - code
+        - purchase_datetime
+        - amount
+        - purchaser
+      properties:
+        idTicket:
+          type: string
+          description: Identificador unico para el ticket de compra.
+        code:
+          type: string
+          description: Identificador mas corto y elocuentel ticket de compra.
+        purchase_datetime:
+          type: date
+          description: Fecha y hora en la que se realizo la compra.
+        amount:
+          type: number
+          description: Cantidad total a pagar de la compra.
+        purchaser:
+          type: string
+          description: Informacion del cliente.
+      example:
+         idTicket: 4ughd73658fn
+         code: cpjs5
+         purchase_datetime: 10/11/23, 11:57
+         amount: 753
+         purchaser: 'Manolo Diaz'

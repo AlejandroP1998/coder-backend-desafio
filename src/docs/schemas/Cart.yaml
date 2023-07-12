@@ -1,7 +1,7 @@
 # Cart
 components:
   schemas:
-    Carrito:
+    Cart:
       type: object
       required:
         - idCart
