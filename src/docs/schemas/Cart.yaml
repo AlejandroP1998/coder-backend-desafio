@@ -1,0 +1,26 @@
+# Cart
+components:
+  schemas:
+    Cart:
+      type: object
+      required:
+        - idCart
+      properties:
+        idCart:
+          type: string
+          description: Identificador unico para el carrito asignado a cada usuario.
+        products:
+          type: array
+          description: Conjunto de productos añadidos por el usuario.
+      example:
+         idCart: 4ughd73658fn
+         products: [
+          {
+            product: "acds546",
+            quantity: 6
+          },
+          {
+            product: "edds060",
+            quantity: 2
+          }
+         ]

@@ -1,0 +1,48 @@
+# User
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - idUser
+        - first_name
+        - last_name
+        - email
+        - age
+        - password
+        - rol
+        - cartId
+      properties:
+        idUser:
+          type: string
+          description: Identificador unico para cada usuario ingresado al sistema.
+        first_name:
+          type: string
+          description: Nombre real del usuario.
+        last_name:
+          type: string
+          description: Apellido del usuario.
+        email:
+          type: string
+          description: Direccion de correo electronico del usuario.
+        age:
+          type: number
+          description: Edad del usuario.
+        password:
+          type: string
+          description: constraseña del usuario.
+        rol:
+          type: string
+          description: titulo que define los privilegios en el sistema.
+        cartId:
+          type: string
+          description: Identificador del carrito de compra asignado.
+      example:
+         idUser: 4ughd73658fn
+         first_name: Juan Manuel
+         last_name: Enriquez Vega
+         email: juanMa26@correo.com
+         age: 27
+         password: as3(23&^c6ds8r&*
+         rol: usuario premium 
+         cartId: 6ushd7c658fc

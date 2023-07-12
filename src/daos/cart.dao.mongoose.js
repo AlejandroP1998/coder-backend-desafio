@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import { DaoMongoose } from './DaoMongoose.js'
 
 const cartSchema = new mongoose.Schema({
-  idCart: { type: String },
+  idCart: { type: String, required: true },
   products: [{
     product: { type: String },
     quantity: { type: Number }

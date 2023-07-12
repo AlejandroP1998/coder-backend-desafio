@@ -1,0 +1,56 @@
+# Product
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - idProduct
+        - title
+        - description
+        - code
+        - price
+        - status
+        - stock
+        - category
+      properties:
+        idProduct:
+          type: string
+          description: Identificador unico para cada producto ingresado al sistema.
+        title:
+          type: string
+          description: Titulo o nombre del producto.
+        description:
+          type: string
+          description: Ofrece mayor detalle del producto.
+        code:
+          type: string
+          description: Identificador de menor longitud y mayor elocuencia del producto.
+        price:
+          type: number
+          description: Numero que indica el precio del producto.
+        status:
+          type: boolean
+          description: Indicador que muestra el estado del producto.
+        stock:
+          type: number
+          description: Numero de unidades disponibles.
+        category:
+          type: string
+          description: Grupo al cual pertenece dicho producto.
+        thumbnails:
+          type: array
+          description: Coleccion de imagenes del producto.
+        owner:
+          type: string
+          description: Usuario que añadio el producto al sistema.
+      example:
+         idProduct: 4ughd73658fn
+         title: desktop computer
+         description: 32GB RAM, 1TB SSD, Monitor 60Hz
+         code: dc56
+         price: 123.78
+         status: true
+         stock: 3
+         category: technology
+         thumbnails: [http://photo1.url.png,http://photo2.url.png,http://photo3.url.png]
+         owner: Elon Musk

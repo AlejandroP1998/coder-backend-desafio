@@ -8,6 +8,7 @@ import { viewsRouter } from './views.router.js'
 import { apiErrorHandler } from '../middlewares/apiErrorHandler.js'
 import { mockingRouter } from './mocking.router.js'
 
+
 export const apiRouter = Router()
 
 apiRouter.use('/ticket', ticketRouter)
