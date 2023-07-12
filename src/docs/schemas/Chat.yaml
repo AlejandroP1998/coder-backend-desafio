@@ -1,0 +1,23 @@
+# Chat
+components:
+  schemas:
+    Chat:
+      type: object
+      required:
+        - idChat
+        - user
+        - message
+      properties:
+        idChat:
+          type: string
+          description: Identificador unico para el chat asignado a cada usuario.
+        user:
+          type: string
+          description: Id del emisor.
+        message:
+          type: string
+          description: Mensaje enviado en la plataforma.
+      example:
+         idChat: 4ughd73658fn
+         user: 456e4s5adad
+         message: hola mucho gusto.

@@ -1,3 +1,11 @@
 tags:
-  name: Productos
-  description: API to manage your products.
+    - name: Productos
+      description: API para manejar los productos.  
+    - name: Usuarios
+      description: API para manejar los usuarios.
+    - name: Mensajes
+      description: API para manejar los mensajes.
+    - name: Carritos
+      description: API para manejar los carritos.
+    - name: Tickets
+      description: API para manejar los tickets.

@@ -1,0 +1,93 @@
+paths:
+  /api/product/:
+
+    get:
+      summary: Obtiene todos los productos en la base de datos
+      tags:
+        - Productos
+      responses:
+        "200":
+          description: Obtiene todos los productos en la base de datos.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+    post:
+        summary: Crea un nuevo producto
+        tags:
+          - Productos
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/NewProduct'
+        responses:
+          "201":
+            description: El producto fue creado con exito.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Product'
+  
+  
+  /api/product/{id}:
+  
+    get:
+      summary: Obtiene la informacion de un producto en especifico
+      tags:
+        - Productos
+      parameters:
+      - name: id
+        in: path
+        description: Usa el id brindado para buscar y luego mostrar el producto.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: El producto con el id brindado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "404":
+          description: No se encontro el producto.
+
+    put:
+      summary: Modifica la informacion de un producto en especifico
+      tags:
+        - Productos
+      parameters:
+      - name: id
+        in: path
+        description: Usa el id brindado para buscar y luego modificar el producto.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: El producto con el id brindado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "404":
+          description: No se encontro el producto.
+
+    delete:
+      summary: Elimina un producto en especifico
+      tags:
+        - Productos
+      parameters:
+      - name: id
+        in: path
+        description: Usa el id brindado para buscar y luego eliminar el producto.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: El producto ha sido eliminado con exito.
+        "404":
+          description: No se encontro el producto.

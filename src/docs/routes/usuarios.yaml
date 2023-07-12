@@ -1,0 +1,106 @@
+paths:
+  /api/user/:
+
+    get:
+      summary: Obtiene todos los usuarios en la base de datos.
+      tags:
+        - Usuarios
+      responses:
+        "200":
+          description: Obtiene todos los usuarios en la base de datos.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+    post:
+      summary: Crea un nuevo usuario
+      tags:
+        - Usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/NewUser'
+      responses:
+        "201":
+          description: El usuario fue creado con exito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /api/user/{id}:
+    get:
+      summary: Obtiene la informacion de un usuario en especifico
+      tags:
+        - Usuarios
+      parameters:
+      - name: id
+        in: path
+        description: Usa el id brindado para buscar y luego mostrar el usuario.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: El usuario con el id brindado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "404":
+          description: No se encontro el usuario.
+    
+    put:
+      summary: Modifica la informacion de un usuario en especifico
+      tags:
+        - Usuarios
+      parameters:
+      - name: id
+        in: path
+        description: Usa el id brindado para buscar y luego modificar el usuario.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: El usuario con el id brindado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "404":
+          description: No se encontro el usuario.
+
+    delete:
+      summary: Elimina un usuario en especifico
+      tags:
+        - Usuarios
+      parameters:
+      - name: id
+        in: path
+        description: Usa el id brindado para buscar y luego eliminar el usuario.
+        required: true
+        type: string
+      responses:
+        "200":
+          description: El usuario con el id brindado ha sido eliminado.
+        "404":
+          description: No se encontro el usuario.
+
+  /api/user/premium:
+    put:
+      summary: Modifica el rol del usuario normal a premium y viceversa
+      tags:
+        - Usuarios
+      responses:
+        "200":
+          description: El usuario con el rol modificado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "404":
+          description: No se encontro el usuario.

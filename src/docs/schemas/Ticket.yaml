@@ -1,0 +1,33 @@
+# Ticket
+components:
+  schemas:
+    Ticket:
+      type: object
+      required:
+        - idTicket
+        - code
+        - purchase_datetime
+        - amount
+        - purchaser
+      properties:
+        idTicket:
+          type: string
+          description: Identificador unico para el ticket de compra.
+        code:
+          type: string
+          description: Identificador mas corto y elocuentel ticket de compra.
+        purchase_datetime:
+          type: date
+          description: Fecha y hora en la que se realizo la compra.
+        amount:
+          type: number
+          description: Cantidad total a pagar de la compra.
+        purchaser:
+          type: string
+          description: Informacion del cliente.
+      example:
+         idTicket: 4ughd73658fn
+         code: cpjs5
+         purchase_datetime: 10/11/23, 11:57
+         amount: 753
+         purchaser: 'Manolo Diaz'
