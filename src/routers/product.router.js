@@ -6,6 +6,6 @@ import { currentRol } from '../middlewares/rol.js'
 export const productRouter = Router()
 
 productRouter.get('/:id?', currentRol, productController.handleGet)
-productRouter.post('/', currentRol,productController.handlePost)
+productRouter.post('/', productController.handlePost)
 productRouter.put('/:id', currentRol, productController.handlePut)
 productRouter.delete('/:id', currentRol, productController.handleDelete)

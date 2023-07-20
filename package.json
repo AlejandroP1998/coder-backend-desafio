@@ -39,6 +39,12 @@
     "@faker-js/faker": "^8.0.2",
     "@types/express": "latest",
     "@types/node": "latest",
-    "nodemon": "latest"
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "nodemon": "latest",
+    "supertest": "^6.3.3"
+  },
+  "mocha": {
+    "timeout": 20000
   }
 }

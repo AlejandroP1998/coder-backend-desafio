@@ -17,10 +17,13 @@ const options = {
       version: '1.0.0',
     },
   },
-  apis: ['./src/docs/**/*.yaml'],
+  apis: ['./docs/**/*.yaml'],
 }
 
 const specs = swaggerJSDoc(options)
+
+console.log('Documentacion disponible en http://localhost:8080/api/docs/')
+//logger.info('Documentacion disponible en http://localhost:8080/api/docs/')
 
 if (process.env.NODE_ENV === 'production') {
   logger.info('entorno de produccion')

@@ -45,7 +45,8 @@ export class product {
       status: this.#status,
       stock: this.#stock,
       thumbnails: this.#thumbnails,
-      category: this.#category
+      category: this.#category,
+      owner: this.#owner
     }
   }
 }
