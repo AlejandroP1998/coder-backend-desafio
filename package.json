@@ -5,6 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "node .",
+    "start:test":"nodemon --exec mocha --recursive",
     "test": "nodemon ."
   },
   "keywords": [],
@@ -45,6 +46,7 @@
     "supertest": "^6.3.3"
   },
   "mocha": {
-    "timeout": 20000
+    "timeout": 20000,
+    "require": "test/GlobalHooks.js"
   }
 }

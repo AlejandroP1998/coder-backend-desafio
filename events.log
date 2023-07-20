@@ -1,15 +1,3 @@
 {"level":"info","message":"entorno de produccion"}
-{"level":"info","message":"Conectando a la base de datos en ->  mongodb+srv://coderUser:123abc123@cluster0.raqdy9j.mongodb.net/ecommerce - 7:06:03 AM"}
-{"level":"info","message":"escuchando en puerto -> 8080 - 7:06:03 AM"}
-{"level":"info","message":"GET en /api/docs/ - 7:06:06 AM"}
-{"level":"info","message":"GET en /api/docs/swagger-ui-standalone-preset.js - 7:06:06 AM"}
-{"level":"info","message":"GET en /api/docs/swagger-ui-bundle.js - 7:06:06 AM"}
-{"level":"info","message":"GET en /api/docs/swagger-ui.css - 7:06:06 AM"}
-{"level":"info","message":"GET en /api/docs/swagger-ui-init.js - 7:06:06 AM"}
-{"level":"info","message":"GET en /api/docs/favicon-32x32.png - 7:06:07 AM"}
-{"level":"info","message":"GET en /api/docs/favicon-32x32.png - 7:06:17 AM"}
-{"level":"info","message":"GET en /api/docs/favicon-32x32.png - 7:06:23 AM"}
-{"level":"info","message":"GET en /api/docs/favicon-32x32.png - 7:06:26 AM"}
-{"level":"info","message":"GET en /api/docs/favicon-32x32.png - 7:06:36 AM"}
-{"level":"info","message":"GET en /api/docs/favicon-32x32.png - 7:06:39 AM"}
-{"level":"info","message":"GET en /api/docs/favicon-32x32.png - 7:06:49 AM"}
+{"level":"info","message":"Conectando a la base de datos en ->  mongodb+srv://coderUser:123abc123@cluster0.raqdy9j.mongodb.net/ecommerce - 9:05:51 AM"}
+{"level":"info","message":"escuchando en puerto -> 8080 - 9:05:51 AM"}
