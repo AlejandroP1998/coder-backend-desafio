@@ -10,7 +10,7 @@ const carrito = {
 
 const idProduct = '9e8a00a7b88d'
 
-describe.only('Api carts', () => {
+describe('Api carts', () => {
   describe('--------------- POST to /api/cart/ --------------- ', () => {
     describe('Peticion sin errores', () => {
       it('Crea un carrito en la base de datos con el esquema correspondiente', async () => {

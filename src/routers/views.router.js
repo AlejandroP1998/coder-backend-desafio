@@ -36,8 +36,7 @@ viewsRouter.get('/products/', compression(), autenticacion, async (req, res, nex
   //? Llamado a la base de datos con los productos
   let result = await productModel.paginate({}, opcionesDePaginacion)
   const usuario = req.session['user']
-  //console.log('usuario', usuario)
-
+  
   res.render('products', {
     pageTitle: 'Productos',
     userInfo: usuario,
@@ -54,10 +53,14 @@ viewsRouter.get('/products/', compression(), autenticacion, async (req, res, nex
   })
 })
 
+//? Pasar a sessions router
+
 viewsRouter.post('/register', registroController)
 
 
 viewsRouter.post('/login/', autenticacionlogin, loginController)
+
+//? -------------------------------------------------------------------
 
 viewsRouter.get('/cart/:cid', async (req, res, next) => {
   let productos = await cartManager.getProductsInCart(req.params.cid)

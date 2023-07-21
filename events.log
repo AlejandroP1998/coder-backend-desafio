@@ -1,6 +1,4 @@
 {"level":"info","message":"entorno de produccion"}
-{"level":"info","message":"Conectando a la base de datos en ->  mongodb+srv://coderUser:123abc123@cluster0.raqdy9j.mongodb.net/ecommerce - 7:29:03 PM"}
-{"level":"info","message":"escuchando en puerto -> 8080 - 7:29:03 PM"}
-{"level":"info","message":"POST en /api/cart/ - 7:29:10 PM"}
-{"level":"info","message":"POST en /api/cart/cartTest/products/9e8a00a7b88d - 7:29:10 PM"}
-{"level":"info","message":"DELETE en /api/cart/cartTest - 7:29:11 PM"}
+{"level":"info","message":"Conectando a la base de datos en ->  mongodb+srv://coderUser:123abc123@cluster0.raqdy9j.mongodb.net/ecommerce - 7:36:23 PM"}
+{"level":"info","message":"escuchando en puerto -> 8080 - 7:36:23 PM"}
+{"level":"info","message":"POST en /api/login/ - 7:36:28 PM"}

@@ -1,26 +1,23 @@
-/* import assert from 'node:assert'
+import assert from 'node:assert'
 import supertest from "supertest"
 
 const httpClient = supertest('http://localhost:8080')
 
+const usuario = {
+  email: 'adminCoder@coder.com',
+  password: 'adminCoder123'
+}
+
 describe.only('Api sessions', () => {
   describe('POST to /api/login/', () => {
     describe('Peticion sin errores', () => {
-      it('Crea el producto en la base de datos con el esquema correspondiente', async () => {
+      it('Busca el usuario en la base de datos', async () => {
 
-        const response = await httpClient.post('/api/product/').send({
-          title: "Papaya",
-          description: "fruta",
-          code: "ppy",
-          price: 5,
-          status: true,
-          stock: 9,
-          category: "alimentos"
-        })
+        const response = await httpClient.post('/api/login/').send(usuario)
 
         assert.strictEqual(response.statusCode, 201)
 
       })
     })
   })
-}) */
+})
