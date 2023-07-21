@@ -16,10 +16,6 @@ class CartService {
 
   async pushProduct(id, product) {
     const cart = await cartRepository.readOne({ idCart: id })
-    //console.log('product.idProduct', product.idProduct)
-    /* cart.products.forEach(element => {
-      console.log(element.product)
-    }); */
     const finded = cart.products.some((prod) => prod.product === product.idProduct)
     if (finded) {
       logger.info(`producto con id: ${product.idProduct} encontrado en la base de datos`)

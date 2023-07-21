@@ -1,5 +1,6 @@
 import { cart } from '../models/cart.js'
 import { cartRepository } from '../repositories/cart.repository.js'
+import { productRepository } from '../repositories/product.repository.js'
 import { cartService } from '../services/cart.service.js'
 import { productService } from '../services/products.service.js'
 
@@ -32,10 +33,10 @@ export async function handlePost(req, res, next) {
 /* metodo para añadir productos a un carrito en especifico */
 export async function handleProdPost(req, res, next) {
   try {
-    const prod = await productService.getProductsById(req.params.pid)
+    const prod = await productRepository.readOne({ idProduct: req.params.pid })
     if (prod) {
       const cart = await cartService.pushProduct(req.params.cid, prod)
-      res.json(cart)
+      res.status(201).json(cart)
     }
   } catch (error) {
     next(error)
@@ -66,13 +67,8 @@ export async function handleProdQuantity(req, res, next) {
 /* Metodo para eliminar el carrito o todos los productos del carrito */
 export async function handleDelete(req, res, next) {
   try {
-    if (req.params.cid) {
-      const borrado = await cartService.deleteProducts(req.params.cid)
-      res.json(borrado)
-    } else {
-      const borrado = await cartRepository.deleteOne(req.params.cid)
-      res.json(borrado)
-    }
+    const borrado = await cartRepository.deleteOne({ idCart: req.params.cid })
+    res.status(201).json(borrado)
   } catch (error) {
     next(error)
   }

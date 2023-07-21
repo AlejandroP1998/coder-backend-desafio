@@ -14,7 +14,7 @@ let productoPrueba = {
   category: "alimentos"
 }
 
-describe.only('Api productos', () => {
+describe('Api productos', () => {
   describe('--------------- POST to /api/product/ --------------- ', () => {
     describe('Peticion sin errores', () => {
       it('Crea el producto en la base de datos con el esquema correspondiente', async () => {
