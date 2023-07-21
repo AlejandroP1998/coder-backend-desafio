@@ -5,7 +5,9 @@ import { currentRol } from '../middlewares/rol.js'
 
 export const productRouter = Router()
 
-productRouter.get('/:id?', currentRol, productController.handleGet)
+/* usar "currentRol" para validar que estas operaciones solo las puedan realizar los admin y usuarios premium */
+
+productRouter.get('/:id?', productController.handleGet)
 productRouter.post('/', productController.handlePost)
-productRouter.put('/:id', currentRol, productController.handlePut)
-productRouter.delete('/:id', currentRol, productController.handleDelete)
+productRouter.put('/:id', productController.handlePut)
+productRouter.delete('/:id', productController.handleDelete)
