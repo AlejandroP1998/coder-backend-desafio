@@ -9,7 +9,13 @@ const userSchema = new mongoose.Schema({
   age: { type: Number, required: true },
   password: { type: String, required: true },
   rol: { type: String, enum: ['admin', 'user'], required: true },
-  cartId: { type: String, required: true }
+  cartId: { type: String, required: true },
+  documents: [
+    {
+      name: { type: String },
+      reference: { type: String }
+    }
+  ]
 }, { versionKey: false });
 
 const userModel = mongoose.model('users', userSchema)

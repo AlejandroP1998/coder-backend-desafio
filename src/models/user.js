@@ -13,16 +13,20 @@ export class user {
   #password
   #rol
   #cartId
+  #documents
+  #last_connection
 
   constructor({
-    idUser = randomUUID().replace('-','').slice(0,12),
+    idUser = randomUUID().replace('-', '').slice(0, 12),
     first_name,
     last_name,
     email,
     age,
     password,
     rol = 'user',
-    cartId = cartRepository.create(cart.dto().cartId)
+    cartId = cartRepository.create(cart.dto().cartId),
+    documents = [],
+    last_connection = 'unknown'
   }) {
     this.#idUser = idUser
     this.#first_name = first_name
@@ -32,6 +36,8 @@ export class user {
     this.#password = hashear(password)
     this.#rol = rol
     this.#cartId = cartId
+    this.#documents = documents
+    this.#last_connection = last_connection
   }
 
   dto() {
