@@ -72,5 +72,9 @@ export async function handleDelete(req, res, next) {
 
 //* Controlador de documentos
 export async function handleDocs(req, res, next) {
-
+  try {
+    res.status(201).json(req.file)
+  } catch (error) {
+    next(error)
+  }
 }

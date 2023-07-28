@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import * as userController from '../controllers/user.controller.js'
+import { extraerFoto, extraerTodo } from '../middlewares/docsManager.js'
 
 export const userRouter = Router()
 
@@ -9,4 +10,4 @@ userRouter.post('/', userController.handlePost)
 userRouter.put('/:id?', userController.handlePut)
 userRouter.delete('/:id', userController.handleDelete)
 userRouter.post('/premium/:id?', userController.handleRolChange)
-userRouter.post('/:id/documents', userController.handleDocs)
+userRouter.post('/:id/documents',extraerTodo, userController.handleDocs)
