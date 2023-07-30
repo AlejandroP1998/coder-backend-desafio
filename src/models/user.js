@@ -26,7 +26,7 @@ export class user {
     rol = 'user',
     cartId = cartRepository.create(cart.dto().cartId),
     documents = [],
-    last_connection = 'unknown'
+    last_connection = new Date().toLocaleTimeString().toString()
   }) {
     this.#idUser = idUser
     this.#first_name = first_name
@@ -49,7 +49,8 @@ export class user {
       age: this.#age,
       password: this.#password,
       rol: this.#rol,
-      cartId: this.#cartId
+      cartId: this.#cartId,
+      last_connection: this.#last_connection
     }
   }
 }

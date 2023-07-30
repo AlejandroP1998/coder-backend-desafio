@@ -16,7 +16,7 @@ export async function registroController(req, res, next) {
     rol: email ==='adminCoder@coder.com' && password === 'adminCoder123' ? 'admin' : 'user',
     cartId: carrito.idCart
   }).dto())
-  await emailService.send(usuario.email,`te doy la bienvenida ${usuario.first_name} a mi ecommerce`)
+  //await emailService.send(usuario.email,`te doy la bienvenida ${usuario.first_name} a mi ecommerce`)
   req.login(usuario, error => {
     if (error) {
       next(new Error('fallo el registro'))
@@ -35,6 +35,9 @@ export async function loginController(req, res, next) {
 
 export async function logoutController(req, res, next) {
   
+  console.log('req.user', req.user)
+  await userRepository.updateOne({ email: req.user.email }, { last_connection: new Date().toLocaleTimeString() })
+
   req.logout(err => {
     res.redirect('/api/')
   })

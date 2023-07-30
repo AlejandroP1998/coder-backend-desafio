@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
       name: { type: String },
       reference: { type: String }
     }
-  ]
+  ],
+  last_connection: {type: String, required: true}
 }, { versionKey: false });
 
 const userModel = mongoose.model('users', userSchema)

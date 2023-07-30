@@ -14,6 +14,8 @@ passport.use('login', new Strategy({
   usernameField: 'email',
 }, async (username, password, done) => {
   const buscado = await userDaoMongoose.readOne({ email: username })
+  await userDaoMongoose.updateOne({ email: username }, { last_connection: new Date().toLocaleTimeString() })
+  
   if (!buscado) {
     return done(new Error('Datos incorrectos'))
   }
@@ -21,8 +23,8 @@ passport.use('login', new Strategy({
     return done(new Error('Datos incorrectos'))
   }
 
-  const carrito = new cart({idCart: buscado.cartId})
-  const finded = await cartRepository.readOne({idCart:carrito.dto().idCart})
+  const carrito = new cart({ idCart: buscado.cartId })
+  const finded = await cartRepository.readOne({ idCart: carrito.dto().idCart })
   finded ? null : cartRepository.create(carrito.dto())
 
   delete buscado.password
