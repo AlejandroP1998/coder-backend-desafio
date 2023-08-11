@@ -1,14 +1,27 @@
-<h1>Login</h1>
-<form id="formLogin">
-  <label for="imput_email">email</label><input type="email" id="input_email" placeholder="email"><br>
-  <label for="imput_password">password</label><input type="password" id="input_password" placeholder="password"><br>
+<head>
+  <link rel="stylesheet" href="/css/login/login.css">
+</head>
 
-  <button type="submit">Enviar</button>
-  <br>
-  <label for="register">Aun no te has registrado?</label><br>
-  <button id="btnR">Registrarme</button><br>
-  <button id="btnReset">olvide mi contraseña</button><br>
-  <a href="/api/sessions/github/">Github registrarme</a>
-</form>
+<section id="Container-form">
+  <form id="formLogin">
+    <section id="form">
+      <label id="title">Login</label><br>
+      <input type="email" id="input_email" placeholder=" Ingrese su email "><br>
+      <input type="password" id="input_password" placeholder=" Ingrese su contraseña "><br>
+      <div>
+        <label id="lshowP" for="showP">Mostrar contraseña</label><input type="checkbox" name="showP" id="showP">
+      </div><br>
+      <button class="button_slide slide_down" type="submit">Enviar</button>
+      <br>
+      <label for="register">Aun no te has registrado?</label><br>
+      <button class="button_slide slide_down" id="btnR">Registrarme</button><br>
+      <button class="button_slide slide_down" id="btnReset">olvide mi contraseña</button><br>
+      <a href="/api/sessions/github/">Github registrarme</a>
+    </section>
+    <section id="add">
+      <img src="/imgs/welcome.jpg" alt="welcome">
+    </section>
+  </form>
+</section>
 
 <script src="/js/login.js"></script>

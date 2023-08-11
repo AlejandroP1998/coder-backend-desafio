@@ -7,6 +7,8 @@ import { chatRepository } from "../repositories/chat.repository.js";
 import compression from "express-compression";
 import path from 'path'
 import { winstonLogger as logger } from "../utils/logger.js";
+import { extraerFotoDePerfil, extraerTodo } from "../middlewares/docsManager.js";
+
 
 export const viewsRouter = Router();
 
@@ -36,12 +38,14 @@ viewsRouter.get('/products/', compression(), autenticacion, async (req, res, nex
   //? Llamado a la base de datos con los productos
   let result = await productModel.paginate({}, opcionesDePaginacion)
   const usuario = req.session['user']
-  
+  const img = usuario.documents.find(e => e.name === 'profile picture')
   res.render('products', {
     pageTitle: 'Productos',
     userInfo: usuario,
     hayDocs: result.docs.length > 0,
     docs: result.docs,
+    img: img === undefined ? "/imgs/noProfilePicture.jpg" : '/resources/profiles/' + img.reference,
+    rol: usuario.rol === 'user',
     limit: result.limit,
     page: result.page,
     totalPages: result.totalPages,
@@ -55,7 +59,7 @@ viewsRouter.get('/products/', compression(), autenticacion, async (req, res, nex
 
 //? Pasar a sessions router
 
-viewsRouter.post('/register', registroController)
+viewsRouter.post('/register', extraerFotoDePerfil, registroController)
 
 
 viewsRouter.post('/login/', autenticacionlogin, loginController)
@@ -107,7 +111,7 @@ viewsRouter.get('/loggerTest', async (req, res, next) => {
 
 
 //+Recuperacion de contraseña
-viewsRouter.get('/account/password/request', async (req,res,next)=>{
+viewsRouter.get('/account/password/request', async (req, res, next) => {
   res.render('resetRequest', {
     pageTitle: 'Request password'
   })
@@ -116,12 +120,12 @@ viewsRouter.get('/account/password/request', async (req,res,next)=>{
 viewsRouter.post('/account/password/reset/', resetPasswordController)
 
 viewsRouter.get('/account/password/reset/:token', async (req, res, next) => {
-  if (req.session.token === req.params.token){
+  if (req.session.token === req.params.token) {
     logger.info('token de restauracion de contraseña valido')
-    res.render('resetPassword',{
-      pageTitle:'Reset password' 
+    res.render('resetPassword', {
+      pageTitle: 'Reset password'
     })
-  }else{
+  } else {
     logger.error('token de restauracion de contraseña invalido')
     res.redirect('/api/login')
   }

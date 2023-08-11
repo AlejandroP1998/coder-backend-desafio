@@ -1,54 +1,49 @@
-<style>
-  ul {
-    list-style-type: none;
-  }
+<link rel="stylesheet" href="/css/products/products.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
 
-  #div1 {
-    height: 90px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-  }
-</style>
+<nav>
+  <a href="#" class="photoCart">
+    <img src="/imgs/carrito.png" alt="carrito de compras">
+  </a>
+  <div class="logo-container">
+    <img src="/imgs/logo.png" alt="logo">
+  </div>
+  <button class="image-container">
+    <img src={{img}} alt="foto de perfil">
+    <div class="menu">
+      <ul>
+        <li><a href="/api/sessions/current">Informacion de cuenta</a></li>
+        {{#if rol}}
+        <li><a href="#">Ser premium</a></li>
+        {{/if}}
+        <li><a href="/api/chat">Chat</a></li>
+        <li><a href="/api/logout">Cerrar sesion</a></li>
+      </ul>
+    </div>
+  </button>
+</nav>
 
 
-{{#if userInfo}}
-{{#if userInfo.email}}
-<h2>Bienvenido {{userInfo.email}}</h2><br>
-<h4>Rol:{{userInfo.rol}}</h4>
-{{else}}
-<h2>Bienvenido{{userInfo}}</h2>
-<h4>rol: usuario</h4>
-{{/if}}
-<br>
-<button id="btnPremium">Ser premium</button>
-<hr>
-<br>
-<button id="btnLO" cartId={{userInfo.cartId}}>Logout</button>
-<hr>
-<br>
-<button id="btnCurrent">Informacion de usuario</button>
-<hr>
-{{else}}
-{{/if}}
-
-{{#if hayDocs}}
-<ul>
+<section class="prod-container">
+  {{#if hayDocs}}
   {{#each docs}}
-  <hr>
-  <li>
-    <h2>Title:</h2> {{this.title}}
-  </li>
-  <li>
-    <h4>Description:</h4> {{this.description}}
-  </li>
-  <button id="btnCompra" productId={{this.idProduct}}>Añadir al carrito</button>
+  <div class="prod-subcontainer">
+    <h2>{{this.title}}</h2><br>
+    <h4>{{this.description}}</h4><br>
+    <h3>Precio:${{this.price}}</h3>
+    <div class="thumbnails">
+      <img src={{this.thumbnails}} alt="imagen del producto">
+    </div>
+    <button id="btnCompra" productId={{this.idProduct}}>Añadir al carrito</button>
+  </div>
   {{/each}}
-</ul>
-{{else}}
-Pagina fuera de los limites...
-{{/if}}
+  </ul>
+  {{else}}
+  Pagina fuera de los limites...
+  {{/if}}
+</section>
 <hr>
 <div id="div1">
   <div>

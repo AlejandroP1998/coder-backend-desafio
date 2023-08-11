@@ -6,5 +6,6 @@ export function autenticacion(req,res,next){
     next()
   }else{
     res.redirect('/api/register/')
+    next()
   }
 }

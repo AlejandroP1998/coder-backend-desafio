@@ -20,7 +20,7 @@ export class DaoMongoose {
 
   async readOne(criteria) {
     const result = await this.#model.findOne(criteria).select({ _id: 0 }).lean()
-    if (!result) throw new Error('NOT FOUND')
+    //if (!result) throw new Error('NOT FOUND')
     return result
   }
 
@@ -31,7 +31,7 @@ export class DaoMongoose {
 
   async updateOne(criteria, newData) {
     const modifiedUser = await this.#model.findOneAndUpdate(criteria, newData, { new: true, projection: { _id: 0 } }).lean()
-    if (!modifiedUser) throw new Error('NOT FOUND')
+    //if (!modifiedUser) throw new Error('NOT FOUND')
     return modifiedUser
   }
 
@@ -41,7 +41,7 @@ export class DaoMongoose {
 
   async deleteOne(criteria) {
     const deletedUser = await this.#model.findOneAndDelete(criteria, { projection: { _id: 0 } }).lean()
-    if (!deletedUser) throw new Error('NOT FOUND')
+    //if (!deletedUser) throw new Error('NOT FOUND')
     return deletedUser
   }
 

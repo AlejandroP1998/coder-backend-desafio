@@ -1,6 +1,5 @@
 import { randomUUID } from "crypto"
 import { hashear } from "../utils/criptografia.js"
-import { cartRouter } from "../routers/cart.router.js"
 import { cartRepository } from "../repositories/cart.repository.js"
 import { cart } from "./cart.js"
 
@@ -50,7 +49,8 @@ export class user {
       password: this.#password,
       rol: this.#rol,
       cartId: this.#cartId,
-      last_connection: this.#last_connection
+      last_connection: this.#last_connection,
+      documents: this.#documents
     }
   }
 }

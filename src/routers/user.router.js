@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import * as userController from '../controllers/user.controller.js'
-import { extraerFoto, extraerTodo } from '../middlewares/docsManager.js'
+import { extraerTodo } from '../middlewares/docsManager.js'
 
 export const userRouter = Router()
 

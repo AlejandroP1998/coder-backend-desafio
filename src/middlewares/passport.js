@@ -7,6 +7,9 @@ import { githubCallbackUrl, githubClientSecret, githubClienteId } from "../confi
 import { userService } from "../services/github.service.js";
 import { cartRepository } from "../repositories/cart.repository.js";
 import { cart } from "../models/cart.js";
+import { user } from "../models/user.js";
+import { userRepository } from "../repositories/user.repository.js";
+import Swal from "sweetalert2";
 
 
 
@@ -14,21 +17,22 @@ passport.use('login', new Strategy({
   usernameField: 'email',
 }, async (username, password, done) => {
   const buscado = await userDaoMongoose.readOne({ email: username })
-  await userDaoMongoose.updateOne({ email: username }, { last_connection: new Date().toLocaleTimeString() })
-  
+
   if (!buscado) {
     return done(new Error('Datos incorrectos'))
   }
   if (!deshashear(password, buscado.password)) {
     return done(new Error('Datos incorrectos'))
-  }
 
+  }
+  await userDaoMongoose.updateOne({ email: username }, { last_connection: new Date().toLocaleTimeString() })
   const carrito = new cart({ idCart: buscado.cartId })
   const finded = await cartRepository.readOne({ idCart: carrito.dto().idCart })
   finded ? null : cartRepository.create(carrito.dto())
 
   delete buscado.password
   done(null, buscado)
+
 }))
 
 passport.use('github', new GithubStrategy({
@@ -37,15 +41,23 @@ passport.use('github', new GithubStrategy({
   callbackURL: githubCallbackUrl
 }, async (accessToken, refreshToken, profile, done) => {
   //console.log(profile)
-  let user
+  let usuario
   try {
-    user = await userService.buscarPorEmail(profile.username)
+    usuario = await userRepository.readOne({ email: profile.username })
+    //user = await userService.buscarPorEmail(profile.username)
   } catch (error) {
     // @ts-ignore
-    user = new user({
+    usuario = new user({
+      first_name: 'usuario de github',
+      last_name: 'Github',
+      email: profile.username,
+      age: 30,
+      password: 'git'
+    })
+    /* user = new user({
       email: profile.username
     })
-    await userService.guardar(user)
+    await userService.guardar(user) */
     //console.log('usersManager.obtenerTodos()', usersManager.obtenerTodos())
   }
   done(null, user)

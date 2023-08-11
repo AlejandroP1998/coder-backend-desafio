@@ -7,11 +7,13 @@ import { userRouter } from './user.router.js'
 import { viewsRouter } from './views.router.js'
 import { apiErrorHandler } from '../middlewares/apiErrorHandler.js'
 import { mockingRouter } from './mocking.router.js'
+import { githubRouter } from './github.router.js'
 
 
 export const apiRouter = Router()
 
 apiRouter.use('/ticket', ticketRouter)
+apiRouter.use('/sessions', githubRouter)
 apiRouter.use('/cart', cartRouter)
 apiRouter.use('/chat', chatRouter)
 apiRouter.use('/product', productRouter)

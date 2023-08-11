@@ -16,7 +16,7 @@ export class product {
     idProduct = randomUUID().replace('-', '').slice(0, 12),
     title,
     description,
-    code,
+    code = randomUUID().replace('-', '').slice(0, 6),
     price,
     status = true,
     stock,

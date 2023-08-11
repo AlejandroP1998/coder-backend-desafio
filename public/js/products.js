@@ -1,12 +1,10 @@
-
-
 function irAPag(limit) {
   const pagDeseada = document.querySelector('input').value || 1
   window.location = `/api/products/?limit=${limit}&page=${pagDeseada}`
 }
 
 
-let cartID
+/* let cartID
 const btnLO = document.querySelector('#btnLO')
 cartID = btnLO.getAttribute('cartId')
 
@@ -49,4 +47,4 @@ const btnCurrent = document.querySelector('#btnCurrent')
 btnCurrent.addEventListener('click', event => {
   event.preventDefault()
   window.location.href = '/api/sessions/current'
-})
+}) */
