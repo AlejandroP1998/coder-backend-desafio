@@ -79,15 +79,17 @@ nav {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
   gap: 30px;
+  background-color: #FD8D14;
 }
 
 .prod-subcontainer {
-  border: 1px solid black;
-  margin: 2px;
+  margin: 12px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  background-color: white;
 
   h2 {
     font-family: 'Cherry Bomb One', cursive;
@@ -102,9 +104,10 @@ nav {
   }
 
   .thumbnails {
-    width: 100%;
+    width: 20vw;
 
     img {
+      border-radius: 8px;
       width: 100%;
       /* La imagen ocupa el 100% del ancho del contenedor */
       height: auto;
@@ -115,4 +118,21 @@ nav {
   }
 
 
+}
+
+.buttonShop {
+  background-color: #790303;
+  color: white;
+  font-family: 'Cherry Bomb One', cursive;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.buttonShop:hover {
+  background-color: #FD8D14;
+  color: #333;
+}
+
+.toastImg {
+  width: 80px;
 }

@@ -10,9 +10,9 @@ class EmailService {
 
   async send(destinatario, mensaje) {
     const mailOptions = {
-      from: 'testeo de un ecommerce',
+      from: '1998japb@gmail.com',
       to: destinatario,
-      subject: 'Mail de testeo',
+      subject: 'Informacion',
       text: mensaje,
     }
     try {

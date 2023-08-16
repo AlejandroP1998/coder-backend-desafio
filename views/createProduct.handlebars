@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/css/create/create.css">
+
+<section class="container">
+  
+  <form id="form">
+    <label class="title">Crear producto</label><br>
+    <input class="large" type="text" id="input_title" placeholder="title"><br>
+    <textarea class="large" id="input_description" cols="30" rows="4" placeholder="description"></textarea><br>
+    <input type="number" id="input_price" placeholder="precio" min="1" pattern="^[0-9]+">
+    <label>Disponible? <input type="checkbox" id="input_status"></label>
+    <input type="number" id="input_stock" placeholder="stock" min="1" pattern="^[0-9]+"><br>
+    <input type="file" id="input_thumbnails" multiple><br>
+    <select id="input_category">
+      <option disabled selected>Categoria</option>
+      <option value="organicos">alimentos organicos</option>
+      <option value="bebidas">bebidas</option>
+      <option value="lacteos">lacteos</option>
+    </select><br>
+    <label>Owner: <h4 id="owner">{{owner}}</h4></label><br>
+    <button class="button_slide slide_down" type="submit">Crear producto</button>
+  </form>
+</section>
+
+<script src="/js/create.js"></script>

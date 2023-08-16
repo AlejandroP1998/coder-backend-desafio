@@ -7,11 +7,14 @@ export function stringValido(valor, nombreCampo){
 }
 
 export function validarEnteroPositivo(valor, nombreCampo) {
-  if (typeof valor !== 'number')
+
+  const numero = parseInt(valor);
+
+  if (typeof numero !== 'number')
     throw new Error(`el campo ${nombreCampo} debe ser un numero`)
-  if (!Number.isInteger(Number(valor)))
+  if (!Number.isInteger(Number(numero)))
     throw new Error(`el campo ${nombreCampo} debe un numero entero`)
-  if (Number(valor) <= 0)
+  if (Number(numero) <= 0)
     throw new Error(`el campo ${nombreCampo} debe ser un numero positivo mayor a cero`)
-  return Number(valor)
+  return Number(numero)
 }

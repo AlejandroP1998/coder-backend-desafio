@@ -15,15 +15,33 @@ class CartService {
   }
 
   async pushProduct(id, product) {
+
     const cart = await cartRepository.readOne({ idCart: id })
-    const finded = cart.products.some((prod) => prod.product === product.idProduct)
+    const finded = cart.products.some((prod) => prod.id === product.idProduct)
     if (finded) {
       logger.info(`producto con id: ${product.idProduct} encontrado en la base de datos`)
-      const index = cart.products.findIndex((prod) => prod.product === product.idProduct)
+      const index = cart.products.findIndex((prod) => prod.id === product.idProduct)
       cart.products[index].quantity += 1
+      let num1 = parseInt(cart.products[index].quantity)
+      let num2 = parseFloat(cart.products[index].price)
+      let total = num1*num2
+
+      cart.products[index].total = total
     } else {
-      cart.products.push({ product: product.idProduct, quantity: 1 })
+      cart.products.push({
+        id: product.idProduct,
+        title: product.title,
+        price: product.price,
+        total: product.price,
+        quantity: 1,
+        image: product.thumbnails[0]
+      })
     }
+    let subTotal = 0
+    cart.products.forEach(prod => {
+      subTotal = subTotal + prod.total
+    })
+    console.log('subtotal', subTotal)
     const filter = { idCart: id }
     const carrito = await cartRepository.updateOne(filter, { products: cart.products })
     return carrito
@@ -31,9 +49,9 @@ class CartService {
 
   async deleteProduct(id, product) {
     const cart = await cartRepository.readOne({ idCart: id })
-    const finded = cart.products.some((prod) => prod.product.idProduct === product.idProduct)
+    const finded = cart.products.some((prod) => prod.id === product.idProduct)
     if (finded) {
-      const index = cart.products.findIndex((prod) => prod.product.idProduct === product.idProduct)
+      const index = cart.products.findIndex((prod) => prod.id === product.idProduct)
       cart.products.splice(index, 1)
     }
     const filter = { idCart: id }

@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/css/misProductos/misProductos.css">
+
+<section class="container">
+  <nav>
+    <a href="/api/products/misProductos/create" class="button_slide slide_down">Crear producto</a>
+    <a href="/api/products" class="button_slide slide_down">regresar</a>
+  </nav>
+
+
+  <section class="prod-container">
+    {{#if hayDocs}}
+    {{#each docs}}
+    <div class="prod-subcontainer">
+      <h2>{{this.title}}</h2><br>
+      <h4>{{this.description}}</h4><br>
+      <h4>Propietario: {{this.owner}}</h4><br>
+      <h3>Precio:${{this.price}}</h3>
+      <div class="thumbnails">
+        <img src=/resources/products/{{this.thumbnails.[0]}} alt="imagen del producto">
+      </div>
+      <button id="btnDelete" productId={{this.idProduct}} class="buttonShop">Eliminar producto</button>
+    </div>
+    {{/each}}
+    </ul>
+    {{else}}
+    No has añadido productos
+    {{/if}}
+  </section>
+
+</section>
+
+<script src="/js/misProductos.js"></script>

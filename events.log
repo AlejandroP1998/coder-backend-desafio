@@ -1,5 +1,17 @@
 {"level":"info","message":"entorno de produccion"}
-{"level":"info","message":"Conectando a la base de datos en ->  mongodb+srv://coderUser:123abc123@cluster0.raqdy9j.mongodb.net/ecommerce - 10:45:44"}
-{"level":"info","message":"escuchando en puerto -> 8080 - 10:45:44"}
-{"level":"info","message":"GET en /api/register/ - 10:45:46"}
-{"level":"info","message":"POST en /api/register/ - 10:45:57"}
+{"level":"info","message":"Conectando a la base de datos en ->  mongodb+srv://coderUser:123abc123@cluster0.raqdy9j.mongodb.net/ecommerce - 14:14:15"}
+{"level":"info","message":"escuchando en puerto -> 8080 - 14:14:15"}
+{"level":"info","message":"GET en /api/products/misProductos - 14:14:21"}
+{"level":"info","message":"GET en /api/products/misProductos/create - 14:14:24"}
+{"level":"info","message":"POST en /api/product/ - 14:14:41"}
+{"level":"info","message":"GET en /api/products/misProductos - 14:14:41"}
+{"level":"info","message":"POST en /api/product/ - 14:14:41"}
+{"level":"info","message":"GET en /resources/products/379295125.jpeg - 14:14:41"}
+{"level":"info","message":"DELETE en /api/product/1c6072ef0d7e - 14:15:15"}
+{"level":"info","message":"GET en /api/products/misProductos - 14:15:16"}
+{"level":"info","message":"correo de bienvenida enviado"}
+{"level":"info","message":"GET en /api/products/misProductos - 14:15:21"}
+{"level":"info","message":"GET en /api/products - 14:15:23"}
+{"level":"info","message":"usuario autenticado - 14:15:23"}
+{"level":"info","message":"GET en /api/products/?limit=12&page=2 - 14:15:28"}
+{"level":"info","message":"usuario autenticado - 14:15:28"}

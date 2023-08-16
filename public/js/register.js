@@ -13,8 +13,7 @@ let newNamePic
 profilePic.addEventListener('change', async event => {
   event.preventDefault()
   const file = profilePic.files[0]
-  //console.log('file', file)
-
+  
   newNamePic = Math.round(Math.random() * 1E9) + '-profilePic.' + file.type.split('/')[1]
   imgCodified = URL.createObjectURL(file)
   profileImg.src = imgCodified
@@ -61,7 +60,7 @@ if (formLogin instanceof HTMLFormElement) {
           await fetch('/api/register/', {
             method: 'POST',
             body: formData
-          }).then(res => res.json(formData))
+          })
 
           encontrado = true
 

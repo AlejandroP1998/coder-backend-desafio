@@ -4,7 +4,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
 
 <nav>
-  <a href="#" class="photoCart">
+  <a href="/api/myCart" class="photoCart">
     <img src="/imgs/carrito.png" alt="carrito de compras">
   </a>
   <div class="logo-container">
@@ -17,9 +17,11 @@
         <li><a href="/api/sessions/current">Informacion de cuenta</a></li>
         {{#if rol}}
         <li><a href="#">Ser premium</a></li>
+        {{else}}
+        <li><a href="/api/products/misProductos">Mis productos</a></li>
         {{/if}}
         <li><a href="/api/chat">Chat</a></li>
-        <li><a href="/api/logout">Cerrar sesion</a></li>
+        <li><a href="/api/logout" id="logout" cartId={{userInfo.cartId}}>Cerrar sesion</a></li>
       </ul>
     </div>
   </button>
@@ -32,11 +34,12 @@
   <div class="prod-subcontainer">
     <h2>{{this.title}}</h2><br>
     <h4>{{this.description}}</h4><br>
-    <h3>Precio:${{this.price}}</h3>
+    <h3>Precio:${{this.price}}</h3><br>
+    <h3>Cantidad <input type="number" id="quantity" min="1"></h3>
     <div class="thumbnails">
-      <img src={{this.thumbnails}} alt="imagen del producto">
+      <img src=/resources/products/{{this.thumbnails.[0]}} alt="imagen del producto">
     </div>
-    <button id="btnCompra" productId={{this.idProduct}}>Añadir al carrito</button>
+    <button id="btnCompra" productId={{this.idProduct}} class="buttonShop">Añadir al carrito</button>
   </div>
   {{/each}}
   </ul>

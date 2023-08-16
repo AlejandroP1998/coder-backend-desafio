@@ -34,7 +34,7 @@ if (formLogin instanceof HTMLFormElement) {
         } catch (error) {
           Swal.fire({
             icon: 'error',
-            title: 'Oops... algo esta mal',
+            title: 'Oops... no apareces en la lista',
             text: 'Revisa que el email y contraseña sean correctos'
           })
         }

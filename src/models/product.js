@@ -13,10 +13,8 @@ export class product {
   #category
   #owner
   constructor({
-    idProduct = randomUUID().replace('-', '').slice(0, 12),
     title,
     description,
-    code = randomUUID().replace('-', '').slice(0, 6),
     price,
     status = true,
     stock,
@@ -24,11 +22,11 @@ export class product {
     category,
     owner = 'admin'
   }) {
-    this.#idProduct = idProduct
-    this.#title = stringValido(title,'title')
+    this.#idProduct = randomUUID().replace('-', '').slice(0, 12)
+    this.#title = title
     this.#description = description
-    this.#code = code
-    this.#price = validarEnteroPositivo(price, 'price')
+    this.#code = randomUUID().replace('-', '').slice(0, 6)
+    this.#price = price
     this.#status = status
     this.#stock = stock
     this.#thumbnails = thumbnails

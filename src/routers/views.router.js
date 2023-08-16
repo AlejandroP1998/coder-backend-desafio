@@ -8,6 +8,8 @@ import compression from "express-compression";
 import path from 'path'
 import { winstonLogger as logger } from "../utils/logger.js";
 import { extraerFotoDePerfil, extraerTodo } from "../middlewares/docsManager.js";
+import { productRepository } from "../repositories/product.repository.js";
+import { cartRepository } from "../repositories/cart.repository.js";
 
 
 export const viewsRouter = Router();
@@ -19,7 +21,6 @@ viewsRouter.get('/', (req, res, next) => {
 viewsRouter.get('/chat', async (req, res, next) => {
 
   const mensajes = await chatRepository.readMany()
-  console.log('req.session.user', req.session.user.rol)
   res.render('chat', {
     pageTitle: 'mensajes',
     hayMensajes: mensajes.length > 0,
@@ -30,7 +31,7 @@ viewsRouter.get('/chat', async (req, res, next) => {
 viewsRouter.get('/products/', compression(), autenticacion, async (req, res, next) => {
 
   const opcionesDePaginacion = {
-    limit: req.query.limit || 10, // tamaño de pagina: 5 por defecto
+    limit: req.query.limit || 12, // tamaño de pagina
     page: req.query.page || 1, // devuelve la primera pagina por defecto
     lean: true // para que devuelva objetos literales, no de mongoose
   }
@@ -56,6 +57,34 @@ viewsRouter.get('/products/', compression(), autenticacion, async (req, res, nex
     pagingCounter: result.pagingCounter,
   })
 })
+
+viewsRouter.get('/products/misProductos', async (req, res, next) => {
+  const usuario = req.session['user']
+  //console.log(usuario.rol)
+  let result
+  if (usuario.rol === 'admin') {
+    result = await productRepository.readMany()
+  } else {
+    result = await productRepository.readMany({ owner: usuario.idUser })
+  }
+
+
+  res.render('misProductos', {
+    pageTitle: 'Mis productos',
+    hayDocs: result.length > 0,
+    docs: result
+  })
+})
+
+
+viewsRouter.get('/products/misProductos/create', async (req, res, next) => {
+  const usuario = req.session['user']
+  res.render('createProduct', {
+    pageTitle: 'Crear',
+    owner: usuario.idUser
+  })
+})
+
 
 //? Pasar a sessions router
 
@@ -129,4 +158,33 @@ viewsRouter.get('/account/password/reset/:token', async (req, res, next) => {
     logger.error('token de restauracion de contraseña invalido')
     res.redirect('/api/login')
   }
+})
+
+
+viewsRouter.get('/myCart', async (req, res, next) => {
+  const usuario = req.session['user']
+  const carrito = await cartRepository.readOne({ idCart: usuario.cartId })
+  console.log('carrito total', carrito.subTotal)
+
+ /*  let items = []
+  let i = 0
+  let j = 0
+  carrito.products.forEach(element => {
+    j++
+  })
+  while(i < j){
+    let item = await productRepository.readOne({idProduct: carrito.products[i].product})
+    item.quantity = carrito.products[i].quantity
+    items.push(item)
+    i++  
+  } */
+
+  //console.log('items', items.length)
+  res.render('MyCart', {
+    pageTitle: 'Mi Carrito',
+    hayItems: carrito.products[0],
+    elements: carrito.products,
+    total: carrito.subTotal,
+    id: usuario.cartId
+  })
 })

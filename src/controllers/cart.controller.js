@@ -37,6 +37,8 @@ export async function handleProdPost(req, res, next) {
     if (prod) {
       const cart = await cartService.pushProduct(req.params.cid, prod)
       res.status(201).json(cart)
+    } else {
+      res.status(404).json({ "message": "No se encontro el producto" })
     }
   } catch (error) {
     next(error)
@@ -56,7 +58,7 @@ export async function handlePut(req, res, next) {
 /* metodo para cambiar quentity de un producto */
 export async function handleProdQuantity(req, res, next) {
   try {
-    const prod = await productService.getProductById(req.params.pid)
+    const prod = await productRepository.readOne({ idProduct: req.params.pid })
     const cart = await cartService.updateProduct(req.params.cid, prod, req.body.quantity)
     res.json(cart)
   } catch (error) {
@@ -77,7 +79,7 @@ export async function handleDelete(req, res, next) {
 /* metodo para eliminar un elemento en especifico del carrito */
 export async function handleProdDelete(req, res, next) {
   try {
-    const prod = await productService.getProductById(req.params.pid)
+    const prod = await productRepository.readOne({ idProduct: req.params.pid })
     if (prod) {
       const cart = await cartService.deleteProduct(req.params.cid, prod)
       res.json(cart)

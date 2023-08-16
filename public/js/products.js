@@ -3,15 +3,44 @@ function irAPag(limit) {
   window.location = `/api/products/?limit=${limit}&page=${pagDeseada}`
 }
 
+const logout = document.querySelector('#logout')
 
-/* let cartID
-const btnLO = document.querySelector('#btnLO')
-cartID = btnLO.getAttribute('cartId')
+const cartId = logout.getAttribute('cartId')
 
-btnLO.addEventListener('click', async event => {
-  event.preventDefault()
-  window.location.href = '/api/logout'
+const btnCompra = document.querySelectorAll('#btnCompra')
+btnCompra.forEach((btn) => {
+  btn.addEventListener('click', async event => {
+    event.preventDefault()
+    const productId = btn.getAttribute('productId')
+    try {
+      await fetch(`/api/cart/${cartId}/products/${productId}`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      }).finally(
+        Swal.fire({
+          title: 'Producto añadido',
+          toast: true,
+          position: 'top-end',
+          background: '#000B49',
+          color: '#fff',
+          showConfirmButton: false,
+          timer: 500,
+          iconHtml: '<img src="/imgs/icon.ico" class="toastImg">'
+        })
+      )
+    } catch (error) {
+      console.log(error)
+    }
+
+  })
 })
+
+
+
+/* 
 
 const btnCompra = document.querySelectorAll('#btnCompra')
 btnCompra.forEach((btn) => {

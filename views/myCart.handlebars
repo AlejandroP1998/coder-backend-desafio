@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/cart/cart.css">
+<nav>
+  <button id="makeShop" cart={{id}}>Realizar compra</button>
+  <h1>{{total}}</h1>
+</nav>
+<section class="container">
+  {{#if hayItems}}
+  {{#each elements}}
+  <section class="subcontainer">
+    <div>
+      <h1>{{this.title}}</h1><br>
+      <h2>Precio: ${{this.price}}</h2><br>
+      <h2>Cantidad: {{this.quantity}}</h2><br>
+      <h2>Total: ${{this.total}}</h2><br>
+      <button id="deleteBtn" prod={{this.id}}>Eliminar</button>
+    </div>
+    <img src=/resources/products/{{this.image}} alt="imagen del producto">
+  </section>
+  {{/each}}
+  {{else}}
+  <h1>No has añadido productos al carrito</h1>
+  {{/if}}
+</section>
+
+<script src="/js/cart.js"></script>

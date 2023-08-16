@@ -5,13 +5,18 @@ import { DaoMongoose } from './DaoMongoose.js'
 const cartSchema = new mongoose.Schema({
   idCart: { type: String, required: true },
   products: [{
-    product: { type: String },
-    quantity: { type: Number }
+    id: { type: String },
+    title: { type: String },
+    price: { type: Number },
+    quantity: { type: Number, default: 1 },
+    total: { type: Number },
+    image: { type: String }
   }
-  ]
+  ],
+  subTotal: {type :Number}
 }, { versionKey: false });
 
-const cartModel = mongoose.model('carts', cartSchema)
+export const cartModel = mongoose.model('carts', cartSchema)
 
 cartSchema.plugin(mongoosePaginate)
 

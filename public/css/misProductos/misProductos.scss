@@ -1,0 +1,95 @@
+.container {
+  background-color: #FD8D14;
+  nav {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+.prod-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+  gap: 30px;
+}
+
+.prod-subcontainer {
+  border: 1px solid black;
+  margin: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+
+  h2 {
+    font-family: 'Cherry Bomb One', cursive;
+    font-size: 2rem;
+    font-weight: bolder;
+  }
+
+  h3 {
+    font-family: 'Cherry Bomb One', cursive;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .thumbnails {
+    width: 100%;
+
+    img {
+      width: 100%;
+      /* La imagen ocupa el 100% del ancho del contenedor */
+      height: auto;
+      /* La altura se ajusta proporcionalmente */
+      display: block;
+      /* Elimina espacios innecesarios debajo de la imagen */
+    }
+  }
+
+
+}
+
+.button_slide {
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  color: #432308;
+  background-color: #FFE066;
+  border: 2px solid #432308;
+  border-radius: 0px;
+  height: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 50%;
+  display: inline-block;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 100%;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0 #EED997;
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.4s;
+}
+
+.slide_down:hover {
+  box-shadow: inset 0 100px 0 0 #432308;
+  color: white;
+}
+
+.buttonShop {
+  background-color: #790303;
+  color: white;
+  font-family: 'Cherry Bomb One', cursive;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.buttonShop:hover {
+  background-color: #FD8D14;
+  color: #333;
+}
