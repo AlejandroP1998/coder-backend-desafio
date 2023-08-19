@@ -136,3 +136,20 @@ nav {
 .toastImg {
   width: 80px;
 }
+
+.paginate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  background-color: #790303;
+  color: white;
+  a{
+    color: #FD8D14;
+  }
+  a:hover{
+    color: blue;
+  }
+}

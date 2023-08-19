@@ -120,4 +120,21 @@ nav .menu a:hover {
 
 .toastImg {
   width: 80px;
+}
+
+.paginate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  background-color: #790303;
+  color: white;
+}
+.paginate a {
+  color: #FD8D14;
+}
+.paginate a:hover {
+  color: blue;
 }/*# sourceMappingURL=products.css.map */

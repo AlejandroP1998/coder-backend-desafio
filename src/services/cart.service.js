@@ -24,7 +24,7 @@ class CartService {
       cart.products[index].quantity += 1
       let num1 = parseInt(cart.products[index].quantity)
       let num2 = parseFloat(cart.products[index].price)
-      let total = num1*num2
+      let total = num1 * num2
 
       cart.products[index].total = total
     } else {
@@ -41,9 +41,9 @@ class CartService {
     cart.products.forEach(prod => {
       subTotal = subTotal + prod.total
     })
-    console.log('subtotal', subTotal)
+    //console.log('subtotal', subTotal)
     const filter = { idCart: id }
-    const carrito = await cartRepository.updateOne(filter, { products: cart.products })
+    const carrito = await cartRepository.updateOne(filter, { products: cart.products, subTotal: subTotal })
     return carrito
   }
 
@@ -54,8 +54,12 @@ class CartService {
       const index = cart.products.findIndex((prod) => prod.id === product.idProduct)
       cart.products.splice(index, 1)
     }
+    let subTotal = 0
+    cart.products.forEach(prod => {
+      subTotal = subTotal + prod.total
+    })
     const filter = { idCart: id }
-    const carrito = await cartRepository.updateOne(filter, { products: cart.products })
+    const carrito = await cartRepository.updateOne(filter, { products: cart.products, subTotal: subTotal })
     return carrito
   }
 

@@ -3,6 +3,7 @@ import { hashear } from "../utils/criptografia.js"
 import { cartRepository } from "../repositories/cart.repository.js"
 import { cart } from "./cart.js"
 
+const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false };
 export class user {
   #idUser
   #first_name
@@ -25,7 +26,7 @@ export class user {
     rol = 'user',
     cartId = cartRepository.create(cart.dto().cartId),
     documents = [],
-    last_connection = new Date().toLocaleTimeString().toString()
+    last_connection = new Date().toLocaleString('es-ES', opciones)
   }) {
     this.#idUser = idUser
     this.#first_name = first_name

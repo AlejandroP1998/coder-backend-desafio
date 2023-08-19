@@ -164,7 +164,6 @@ viewsRouter.get('/account/password/reset/:token', async (req, res, next) => {
 viewsRouter.get('/myCart', async (req, res, next) => {
   const usuario = req.session['user']
   const carrito = await cartRepository.readOne({ idCart: usuario.cartId })
-  console.log('carrito total', carrito.subTotal)
 
  /*  let items = []
   let i = 0

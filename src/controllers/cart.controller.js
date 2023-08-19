@@ -69,7 +69,7 @@ export async function handleProdQuantity(req, res, next) {
 /* Metodo para eliminar el carrito o todos los productos del carrito */
 export async function handleDelete(req, res, next) {
   try {
-    const borrado = await cartRepository.deleteOne({ idCart: req.params.cid })
+    const borrado = await cartRepository.updateOne({ idCart: req.params.cid, products: [] })
     res.status(201).json(borrado)
   } catch (error) {
     next(error)

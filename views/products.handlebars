@@ -35,7 +35,6 @@
     <h2>{{this.title}}</h2><br>
     <h4>{{this.description}}</h4><br>
     <h3>Precio:${{this.price}}</h3><br>
-    <h3>Cantidad <input type="number" id="quantity" min="1"></h3>
     <div class="thumbnails">
       <img src=/resources/products/{{this.thumbnails.[0]}} alt="imagen del producto">
     </div>
@@ -47,13 +46,12 @@
   Pagina fuera de los limites...
   {{/if}}
 </section>
-<hr>
-<div id="div1">
+<div class="paginate">
   <div>
     <a {{#if hasPrevPage}} href="/api/products/?limit={{limit}}&page={{prevPage}}" {{/if}}>Prev</a>
     [{{ page }}]
     <a {{#if hasNextPage}} href="/api/products/?limit={{limit}}&page={{nextPage}}" {{/if}}>Next</a><br>
-  </div>
+  </div><br>
   <div>
     Página: <input type="text"> <button onclick="irAPag({{limit}})">ir</button>
   </div>

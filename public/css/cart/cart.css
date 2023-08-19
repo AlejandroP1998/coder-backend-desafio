@@ -7,6 +7,23 @@ nav {
   height: 10vh;
   background-color: brown;
 }
+nav h1 {
+  font-family: "Cherry Bomb One", cursive;
+  font-size: 2rem;
+  font-weight: bolder;
+  color: white;
+  margin-right: 100px;
+}
+nav button {
+  background-color: #FD8D14;
+  color: black;
+  font-family: "Cherry Bomb One", cursive;
+  border-radius: 8px;
+  padding: 10px;
+}
+nav button:hover {
+  background-color: chartreuse;
+}
 
 .container {
   display: grid;
@@ -42,6 +59,12 @@ nav {
 .subcontainer h3 {
   font-family: "Cherry Bomb One", cursive;
   font-size: 1rem;
+}
+.subcontainer button {
+  background-color: #790303;
+  color: white;
+  font-family: "Cherry Bomb One", cursive;
+  border-radius: 8px;
 }
 .subcontainer img {
   border-radius: 8px;

@@ -1,5 +1,7 @@
 import { randomUUID } from "crypto"
 
+const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false };
+
 export class ticket {
   #idTicket
   #code
@@ -8,8 +10,8 @@ export class ticket {
   #purchaser
   constructor({
     idTicket = randomUUID().replace('-', '').slice(0, 12),
-    code,
-    purchase_datetime,
+    code = randomUUID().replace('-', '').slice(0, 6),
+    purchase_datetime = new Date().toLocaleString('es-ES', opciones),
     amount,
     purchaser
   }) {
