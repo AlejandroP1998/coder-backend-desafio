@@ -1,6 +1,8 @@
 import { ticket } from '../models/ticket.js'
 import { cartRepository } from '../repositories/cart.repository.js'
+import { productRepository } from '../repositories/product.repository.js'
 import { ticketRepository } from '../repositories/ticket.repository.js'
+import { emailService } from '../services/email.service.js'
 
 export async function handleGet(req, res, next) {
   try {
@@ -18,9 +20,34 @@ export async function handleGet(req, res, next) {
 
 export async function handlePost(req, res, next) {
   try {
+    let mensaje = '<h1>Detalle de compra</h1><br><ul><br>'
     const usuario = req.session['user']
     const cart = await cartRepository.readOne({ idCart: usuario.cartId })
-    const creado = await ticketRepository.create(new ticket({ amount: cart.subTotal, purchaser: usuario.email }).dto())
+    let i = 0
+    const compra = []
+    while(cart.products[i]){
+      const prod = await productRepository.readOne({idProduct: cart.products[i].id})
+      let num1 = parseInt(prod.stock)
+      let num2 = parseInt(cart.products[i].quantity)
+      let resta = num1 - num2
+      if(resta > 0){
+        compra.push(cart.products[i])
+      }else{
+        mensaje = mensaje + `<li>El producto: ${cart.products[i].title} no pudo procesarce ya que la cantidad: ${cart.products[i].quantity} exedia el stock</li><br>` 
+      }
+      i++
+    }
+    let total = 0
+    compra.forEach(product => {
+      mensaje = mensaje + `<li>Producto: ${product.title} - Precio: $${product.price} - Cantidad: ${product.quantity}</li><br>` 
+      total += product.total
+    });
+    mensaje = mensaje + '</ul><br>'
+    const creado = await ticketRepository.create(new ticket({ amount: total, purchaser: usuario.email }).dto())
+    mensaje = mensaje + `<h2>SubTotal: ${total} </h2><br>
+    <h2>Codigo de ticket: ${creado.code}</h2><br>
+    <h2>Email de comprador: ${creado.purchaser}</h2><br>`
+    await emailService.send(usuario.email,mensaje)
     await cartRepository.updateOne({ idCart: usuario.cartId }, { products: [] })
     res.status(201).json(creado)
   } catch (error) {

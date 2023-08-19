@@ -13,7 +13,7 @@ class EmailService {
       from: '1998japb@gmail.com',
       to: destinatario,
       subject: 'Informacion',
-      text: mensaje,
+      html: mensaje,
     }
     try {
       const info = await this.#clienteNodemailer.sendMail(mailOptions)
