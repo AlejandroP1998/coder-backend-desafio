@@ -20,5 +20,5 @@ const userSchema = new mongoose.Schema({
 }, { versionKey: false });
 
 const userModel = mongoose.model('users', userSchema)
-
+export default userModel
 export const userDaoMongoose = new DaoMongoose(userModel)

@@ -10,6 +10,7 @@ import { winstonLogger as logger } from "../utils/logger.js";
 import { extraerFotoDePerfil, extraerTodo } from "../middlewares/docsManager.js";
 import { productRepository } from "../repositories/product.repository.js";
 import { cartRepository } from "../repositories/cart.repository.js";
+import { userRepository } from "../repositories/user.repository.js";
 
 
 export const viewsRouter = Router();
@@ -47,6 +48,7 @@ viewsRouter.get('/products/', compression(), autenticacion, async (req, res, nex
     docs: result.docs,
     img: img === undefined ? "/imgs/noProfilePicture.jpg" : '/resources/profiles/' + img.reference,
     rol: usuario.rol === 'user',
+    isAdmin: usuario.rol === 'admin',
     limit: result.limit,
     page: result.page,
     totalPages: result.totalPages,
@@ -60,14 +62,12 @@ viewsRouter.get('/products/', compression(), autenticacion, async (req, res, nex
 
 viewsRouter.get('/products/misProductos', async (req, res, next) => {
   const usuario = req.session['user']
-  //console.log(usuario.rol)
   let result
   if (usuario.rol === 'admin') {
     result = await productRepository.readMany()
   } else {
     result = await productRepository.readMany({ owner: usuario.idUser })
   }
-
 
   res.render('misProductos', {
     pageTitle: 'Mis productos',
@@ -86,14 +86,13 @@ viewsRouter.get('/products/misProductos/create', async (req, res, next) => {
 })
 
 
-//? Pasar a sessions router
+
 
 viewsRouter.post('/register', extraerFotoDePerfil, registroController)
 
 
 viewsRouter.post('/login/', autenticacionlogin, loginController)
 
-//? -------------------------------------------------------------------
 
 viewsRouter.get('/cart/:cid', async (req, res, next) => {
   let productos = await cartManager.getProductsInCart(req.params.cid)
@@ -119,9 +118,12 @@ viewsRouter.get('/login/', async (req, res, next) => {
 viewsRouter.get('/logout', logoutController)
 
 viewsRouter.get('/sessions/current', async (req, res, next) => {
+  const usuario = req.session['user']
+  const img = usuario.documents.find(e => e.name === 'profile picture')
   res.render('session', {
     pageTitle: 'Current user',
-    userInfo: req.session.user
+    userInfo: usuario,
+    img: img ? img.reference : null
   })
 })
 
@@ -165,25 +167,32 @@ viewsRouter.get('/myCart', async (req, res, next) => {
   const usuario = req.session['user']
   const carrito = await cartRepository.readOne({ idCart: usuario.cartId })
 
- /*  let items = []
-  let i = 0
-  let j = 0
-  carrito.products.forEach(element => {
-    j++
-  })
-  while(i < j){
-    let item = await productRepository.readOne({idProduct: carrito.products[i].product})
-    item.quantity = carrito.products[i].quantity
-    items.push(item)
-    i++  
-  } */
 
-  //console.log('items', items.length)
   res.render('MyCart', {
     pageTitle: 'Mi Carrito',
     hayItems: carrito.products[0],
     elements: carrito.products,
     total: carrito.subTotal,
     id: usuario.cartId
+  })
+})
+
+
+viewsRouter.get('/premium/', async (req, res, next) => {
+  const usuario = req.session['user']
+  const img = usuario.documents.find(e => e.name === 'profile picture')
+  res.render('premium', {
+    pageTitle: 'Premium',
+    userInfo: usuario,
+    img: img ? img.reference : null
+  })
+})
+
+viewsRouter.get('/userList', async (req,res,next) => {
+  const users = await userRepository.readMany()
+  res.render('userList', {
+    pageTitle:'Lista de usuarios',
+    hayUsuarios: users.length > 0,
+    usuario: users
   })
 })

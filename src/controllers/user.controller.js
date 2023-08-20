@@ -1,14 +1,25 @@
 import { userRepository } from '../repositories/user.repository.js'
+import { usersService } from '../services/user.service.js'
 import { deshashear, hashear } from '../utils/criptografia.js'
 
 export async function handleGet(req, res, next) {
   try {
     if (req.params.id) {
       const buscado = await userRepository.readOne({ id: req.params.id })
-      res.json(buscado)
+      res.json({nombre: buscado.first_name, email: buscado.email, tipo_de_cuenta: buscado.rol})
     } else {
-      const user = await userRepository.readMany(req.query)
-      res.json(user)
+      const users = await userRepository.readMany(req.query)
+      const fixedUsers = []
+      
+      users.forEach(user => {
+        fixedUsers.push({
+          nombre: user.first_name, 
+          email: user.email, 
+          tipo_de_cuenta: user.rol 
+        })
+      });
+
+      res.json(fixedUsers)
     }
   } catch (error) {
     next(error)
@@ -49,12 +60,12 @@ export async function handleRolChange(req, res, next) {
       const usuario = await userRepository.readOne({ idUser: req.params.id })
       usuario.rol === 'user' ? usuario.rol = 'premium' : usuario.rol = 'user'
       await userRepository.updateOne({ idUser: req.params.id }, usuario)
-      req.session.user = usuario
+      req.session['user'] = usuario
     } else {
       const usuario = await userRepository.readOne({ email: req.session.user.email })
       usuario.rol === 'user' ? usuario.rol = 'premium' : usuario.rol = 'user'
       await userRepository.updateOne({ email: req.session.user.email }, usuario)
-      req.session.user = usuario
+      req.session['user'] = usuario
     }
   } catch (error) {
     next(error)
@@ -63,8 +74,13 @@ export async function handleRolChange(req, res, next) {
 
 export async function handleDelete(req, res, next) {
   try {
-    const borrado = await userRepository.deleteOne(req.params.id)
-    res.json(borrado)
+    if(req.params.id){
+      await userRepository.deleteOne({ idUser: req.params.id })
+      res.status(201).json({ "message": "usuario eliminado" })
+    }else{
+      usersService.delete()
+      res.status(201).json({"message":"usuarios sin conectarse por 2 dias eliminados"})
+    }
   } catch (error) {
     next(error)
   }

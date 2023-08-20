@@ -16,9 +16,12 @@
       <ul>
         <li><a href="/api/sessions/current">Informacion de cuenta</a></li>
         {{#if rol}}
-        <li><a href="#">Ser premium</a></li>
+        <li><a href="/api/premium/">Ser premium</a></li>
         {{else}}
         <li><a href="/api/products/misProductos">Mis productos</a></li>
+        {{/if}}
+        {{#if isAdmin}}
+        <li><a href="/api/userList">Lista de usuarios</a></li>
         {{/if}}
         <li><a href="/api/chat">Chat</a></li>
         <li><a href="/api/logout" id="logout" cartId={{userInfo.cartId}}>Cerrar sesion</a></li>

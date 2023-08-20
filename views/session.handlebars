@@ -1,13 +1,18 @@
-{{#if userInfo}}
-<h1>Usuario logueado actualmente</h1>
-<h2>Rol</h2>
-{{userInfo.rol}}
-<h2>Nombre</h2>
-{{userInfo.first_name}}
-<h2>Apellido</h2>
-{{userInfo.last_name}}
-<h2>email</h2>
-{{userInfo.email}}
-{{else}}
-<h2>No se encontro usuario</h2>
-{{/if}}
+<link rel="stylesheet" href="/css/current/current.css">
+<section class="container">
+  <div class="info">
+    {{#if userInfo}}
+    {{#if img}}
+    <div class="photo">
+      <img src=/resources/profiles/{{img}} alt="profile picture">
+    </div>
+    {{/if}}
+    <h2>{{userInfo.first_name}}, {{userInfo.last_name}}</h2>
+    <h2>Rol: {{userInfo.rol}}</h2>
+    <h2>Correo: {{userInfo.email}}</h2>
+    <a href="/api/products/">Regresar</a>
+    {{else}}
+    <h2>No se encontro usuario</h2>
+    {{/if}}
+  </div>
+</section>

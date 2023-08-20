@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/css/premium/premium.css">
+
+<section class="container">
+  <div class="info">
+    {{#if userInfo}}
+    <div class="userInfo">
+      {{#if img}}
+      <div class="photo">
+        <img src=/resources/profiles/{{img}} alt="profile picture">
+      </div>
+      {{/if}}
+      <h2>{{userInfo.first_name}}, {{userInfo.last_name}}</h2>
+      <h2>Rol: {{userInfo.rol}}</h2>
+      <h2>Correo: {{userInfo.email}}</h2>
+    </div>
+    <form id="form">
+      <fieldset>
+        <legend>Requerimientos para ser premium</legend>
+        <label>Documento de identificacion: <input type="file" id="input_identificacion"></label>
+        <label>Comprobante de domicilio: <input type="file" id="input_domicilio"></label>
+        <label>Comprobante de estado de cuenta: <input type="file" id="input_cuenta"></label>
+        <button type="submit">Actualizar datos</button>
+      </fieldset>
+    </form>
+    <a href="/api/products/">Regresar</a>
+    <button>Ser premium</button>
+    {{else}}
+    <h2>No se encontro usuario</h2>
+    {{/if}}
+  </div>
+</section>
+
+<script src="/js/premium.js"></script>
